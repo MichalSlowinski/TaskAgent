@@ -37,12 +37,16 @@ public class TaskAgent extends Application {
                 user_state = 0;
                 actual_option = 0;
                 logged = new Users(check.getInt(1), check.getString(2), check.getString(5), check.getString(3), check.getString(6), id_groups);
-                if(id_groups == 3) {
-                    open_window("/TaskAgent/admin.fxml","Administrator");
-                } else if(id_groups == 2) {
-                    open_window("/TaskAgent/supervisor.fxml","Supervisor");
-                } else {
-                    open_window("/TaskAgent/user.fxml","User");
+                switch (id_groups) {
+                    case 0:
+                        open_window("/TaskAgent/admin.fxml","Administrator");
+                        break;
+                    case 1:
+                        open_window("/TaskAgent/supervisor.fxml","Supervisor");
+                        break;
+                    default:
+                        open_window("/TaskAgent/user.fxml","User");
+                        break;
                 }
                 
             } else {
