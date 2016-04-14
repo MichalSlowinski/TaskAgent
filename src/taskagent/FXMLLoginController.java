@@ -6,29 +6,30 @@ import TaskAgent.TaskAgent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class FXMLLoginController implements Initializable {
+public class FXMLLoginController  {
     
     @FXML
-    private Label label;
+   
     public TextField login;
     public PasswordField password;
-    
+    String log = login.getText();
+    String pas = password.getText();
     @FXML
+    
+    
+    
     private void handleButtonAction(ActionEvent event)  {
-        String l = login.getText();
-        String p = password.getText();
-        if(!l.equals("") && !p.equals("")) {
-            TaskAgent.login(l, p);
+        
+        if(!log.equals("") && !pas.equals("")) {
+            TaskAgent.login(log, pas);
         } else {
            TaskAgent.alert("Error","Podaj pełne dane logowania");
         }
     }
 
-    @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    

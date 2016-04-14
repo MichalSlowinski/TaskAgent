@@ -69,7 +69,7 @@ public class TaskAgent extends Application {
     }
     
     public static void logout() {
-        open_window("/TaskAgent/FXMLLogin.fxml","Login");
+        open_window("/TaskAgent/FXMLLogin.fxml","FXMLLogin.fxml");
     }
      public static void open_window(String window, String title) {
         try {
