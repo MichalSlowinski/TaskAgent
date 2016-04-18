@@ -13,18 +13,19 @@ public class FXMLLoginController  {
     
     @FXML
    
-    public TextField login;
-    public PasswordField password;
-    String log = login.getText();
-    String pas = password.getText();
+    public TextField log;
+    public PasswordField pswd;
+    
     @FXML
     
     
     
     private void handleButtonAction(ActionEvent event)  {
+        String usr = log.getText();
+        String pas = pswd.getText();
         
-        if(!log.equals("") && !pas.equals("")) {
-            TaskAgent.login(log, pas);
+        if(!usr.equals("") && !pas.equals("")) {
+            TaskAgent.login(usr, pas);
         } else {
            TaskAgent.alert("Error","Podaj pełne dane logowania");
         }
