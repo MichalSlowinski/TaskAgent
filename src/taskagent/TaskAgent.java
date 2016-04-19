@@ -30,7 +30,7 @@ public class TaskAgent extends Application {
     }
     
     public static void login(String login, String password) {
-       ResultSet check = dbc.select("SELECT usr.id_groups,usr.login,usr.name,usr.surname,ps.password FROM from passwords ps join users usr WHERE UPPER(login) = UPPER('"+login+"') AND password = '"+password+"';");                
+       ResultSet check = dbc.select("Select id_groups from user where login="+login+" and password="+password+";");                
         try {
             if(check.next()) {
                 id_groups = check.getInt(4);
@@ -38,13 +38,13 @@ public class TaskAgent extends Application {
                 actual_option = 0;
                 logged = new Users(check.getInt(1), check.getString(2), check.getString(5), check.getString(3), check.getString(6), id_groups);
                 switch (id_groups) {
-                    case 0:
+                    case 1:
                         open_window("/TaskAgent/admin.fxml","Administrator");
                         break;
-                    case 1:
+                    case 2:
                         open_window("/TaskAgent/supervisor.fxml","Supervisor");
                         break;
-                    default:
+                    case 3:
                         open_window("/TaskAgent/user.fxml","User");
                         break;
                 }
