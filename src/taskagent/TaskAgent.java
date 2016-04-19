@@ -15,21 +15,18 @@ import javafx.stage.Stage;
 
 public class TaskAgent extends Application {
     public static Stage current;
-    public static DBConnection dbc;
+   // public static DBConnection dbc;
     public static int id_groups;
-    final String Host="/sql7114809";
-    final String User="sql7114809";
-    final String Pswd="se4Ag7WSZ3";
     public static Users logged = null;
     public static int user_state;
     public static int actual_option;
     @Override
     public void start(Stage stage) throws Exception {
-        dbc = new DBConnection();
+        
         open_window("/TaskAgent/FXMLLogin.fxml","Login");
     }
     
-    public static void login(String login, String password) 
+   /* public static void login(String login, String password) 
     {
         try {
             dbc.getConnection();
@@ -65,7 +62,7 @@ public class TaskAgent extends Application {
         } catch (SQLException ex) {
             Logger.getLogger(TaskAgent.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }*/
     
    
 

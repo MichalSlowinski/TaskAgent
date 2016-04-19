@@ -1,8 +1,15 @@
 package Controllers;
 
+import TaskAgent.DBConnection;
 import java.net.URL;
 import java.util.ResourceBundle;
 import TaskAgent.TaskAgent;
+import static TaskAgent.TaskAgent.*;
+import TaskAgent.Users;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -14,22 +21,62 @@ public class FXMLLoginController  {
    
     public TextField log;
     public PasswordField pswd;
+     public static DBConnection dbc;
     
     @FXML
     
     
-    
-    private void handleButtonAction(ActionEvent event)  {
+     
+    private void handleButtonAction(ActionEvent event) throws SQLException  {
         String usr = log.getText();
         String pas = pswd.getText();
         
-        if(!usr.equals("") && !pas.equals("")) {
-            TaskAgent.login(usr, pas);
-        } else {
-           TaskAgent.alert("Error","Podaj pełne dane logowania");
+       
+            login(usr, pas);
+        
+    }
+ public static void login(String login, String password) throws SQLException 
+    {
+        
+        try {
+            dbc.getConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(TaskAgent.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TaskAgent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       ResultSet check = dbc.Query("Select id_groups from user where login="+login+" and password="+password+";");                
+        dbc.close();
+       try{
+            
+               String[] arr = null;
+            while (check.next()) {
+                String em = check.getString("id_groups");
+               arr = em.split("\n");
+               
+            }
+             for (int i =0; i < arr.length; i++){
+                   System.out.println(arr[i]);}
+               /*
+                switch (id_groups) {
+                    case 1:
+                        open_window("/TaskAgent/admin.fxml","Administrator");
+                        break;
+                    case 2:
+                        open_window("/TaskAgent/supervisor.fxml","Supervisor");
+                        break;
+                    case 3:
+                        open_window("/TaskAgent/user.fxml","User");
+                        break;
+                }
+                
+           */
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(TaskAgent.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    

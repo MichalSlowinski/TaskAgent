@@ -70,25 +70,5 @@ public class DBConnection {
         return resultSet;
     }
 
-    public static String toString(ResultSet resultSet) { //TODO delete this method
-        StringBuilder sBuffer = null;
-        if(resultSet != null) {
-            try {
-                sBuffer = new StringBuilder("");
-                ResultSetMetaData rsmd = resultSet.getMetaData();
-                int columnsNumber = rsmd.getColumnCount();
-                while (resultSet.next()) {
-                    for (int i = 1; i <= columnsNumber; i++) {
-                        if (i > 1) sBuffer.append(",  ");
-                        String columnValue = resultSet.getString(i);
-                        sBuffer.append(rsmd.getColumnName(i)).append(": ").append(columnValue);
-                    }
-                    sBuffer.append("\n");
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return sBuffer == null ? "Missing data - resultSet == null" : sBuffer.toString();
-    }
+ 
 }
