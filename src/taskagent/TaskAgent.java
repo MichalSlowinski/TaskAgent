@@ -17,7 +17,7 @@ public class TaskAgent extends Application {
     public static Stage current;
     public static DBConnection dbc;
     public static int id_groups;
-    final String Host="jdbc:mysql://sql7.freesqldatabase.com:3306/sql7114809";
+    final String Host="/sql7114809";
     final String User="sql7114809";
     final String Pswd="se4Ag7WSZ3";
     public static Users logged = null;
@@ -25,13 +25,23 @@ public class TaskAgent extends Application {
     public static int actual_option;
     @Override
     public void start(Stage stage) throws Exception {
-        dbc = new DBConnection(Host,User,Pswd);
+        dbc = new DBConnection();
         open_window("/TaskAgent/FXMLLogin.fxml","Login");
     }
     
-    public static void login(String login, String password) {
-       ResultSet check = dbc.select("Select id_groups from user where login="+login+" and password="+password+";");                
+    public static void login(String login, String password) 
+    {
         try {
+            dbc.getConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(TaskAgent.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TaskAgent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+       ResultSet check = dbc.Query("Select id_groups from user where login="+login+" and password="+password+";");                
+        dbc.close();
+       try {
             if(check.next()) {
                 id_groups = check.getInt(4);
                 user_state = 0;
