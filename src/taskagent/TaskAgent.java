@@ -22,43 +22,9 @@ public class TaskAgent extends Application {
         open_window("/TaskAgent/FXMLLogin.fxml","Login");
     }
     
-   /* public static void login(String login, String password) 
-    {
-        try {
-            dbc.getConnection();
-        } catch (SQLException ex) {
-            Logger.getLogger(TaskAgent.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TaskAgent.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-       ResultSet check = dbc.Query("Select id_groups from user where login="+login+" and password="+password+";");                
-        dbc.close();
-       try {
-            if(check.next()) {
-                id_groups = check.getInt(4);
-                user_state = 0;
-                actual_option = 0;
-                logged = new Users(check.getInt(1), check.getString(2), check.getString(5), check.getString(3), check.getString(6), id_groups);
-                switch (id_groups) {
-                    case 1:
-                        open_window("/TaskAgent/admin.fxml","Administrator");
-                        break;
-                    case 2:
-                        open_window("/TaskAgent/supervisor.fxml","Supervisor");
-                        break;
-                    case 3:
-                        open_window("/TaskAgent/user.fxml","User");
-                        break;
-                }
-                
-            } else {
-                alert("Error","Złe dane");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TaskAgent.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }*/
+  
+             //   logged = new Users(check.getInt(1), check.getString(2), check.getString(5), check.getString(3), check.getString(6), id_groups);
+             
     
    
 
@@ -91,7 +57,7 @@ public class TaskAgent extends Application {
             }
             current = stage;
          } catch(Exception e) {
-             alert("Error","Nie można otwożyć okna "+e.getLocalizedMessage().toString());
+             alert("Error","Nie można otwożyć okna "+e.getLocalizedMessage());
          }
     }
     public static void main(String[] args) {
