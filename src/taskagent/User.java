@@ -10,7 +10,7 @@ public class User {
         this.user_id = user_id;
         
     }
-        
+            
     public void setUserId(int id) {
         this.user_id = id;
     }

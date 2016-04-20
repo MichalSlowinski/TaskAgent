@@ -13,7 +13,7 @@ public class TaskAgent extends Application {
     public static Stage current;
    // public static DBConnection dbc;
     public static int id_groups;
-    
+    public static int user_id;
     public static int user_state;
     public static int actual_option;
     @Override

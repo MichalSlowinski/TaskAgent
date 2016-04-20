@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import TaskAgent.TaskAgent;
 import static TaskAgent.TaskAgent.*;
+import TaskAgent.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -13,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import taskagent.WhoIm;
 
 public class FXMLLoginController  {
     
@@ -20,8 +22,8 @@ public class FXMLLoginController  {
    
     public TextField log;
     public PasswordField pswd;
-     public static DBConnection dbc;
-    
+    public static DBConnection dbc;
+    public static User user = null;
     @FXML
     
     
@@ -45,11 +47,16 @@ public class FXMLLoginController  {
             Logger.getLogger(TaskAgent.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-       ResultSet check = dbc.Query("Select id_groups from user where login='"+login+"' and password='"+password+"';");                
+       ResultSet check = dbc.Query("Select id_groups,id from user where login='"+login+"' and password='"+password+"';");                
         
         while(check.next()){
             id_groups=check.getInt("id_groups");
+            user_id=check.getInt("id");
         }
+        user=new User(user_id);
+        WhoIm.getInstance().setUser(user);
+        
+        
         switch (id_groups) {
             case 1:
                 open_window("/TaskAgent/FXMLAdmin.fxml","Administrator");

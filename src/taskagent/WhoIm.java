@@ -6,7 +6,6 @@
 package taskagent;
 
 import TaskAgent.User;
- 
 
 
 
@@ -23,11 +22,11 @@ public class WhoIm {
         return instance;
     }
 
-    public User getUserid() {
+    public User getUser() {
         return user;
     }
 
-    public void setUserid(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
