@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import TaskAgent.TaskAgent;
 import static TaskAgent.TaskAgent.*;
-import TaskAgent.Users;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -46,28 +45,21 @@ public class FXMLLoginController  {
             Logger.getLogger(TaskAgent.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-       ResultSet check = dbc.Query("Select id,id_groups from user where login="+login+" and password="+password+";");                
-        dbc.close();
-       try{
-            
-           id_groups=check.getInt("id_groups");
-           
-                switch (id_groups) {
-                    case 1:
-                        open_window("/TaskAgent/admin.fxml","Administrator");
-                        break;
-                    case 2:
-                        open_window("/TaskAgent/supervisor.fxml","Supervisor");
-                        break;
-                    case 3:
-                        open_window("/TaskAgent/user.fxml","User");
-                        break;
-                }
-                
+       ResultSet check = dbc.Query("Select id_groups from user where login='"+login+"' and password='"+password+"';");                
         
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(TaskAgent.class.getName()).log(Level.SEVERE, null, ex);
+        while(check.next()){
+            id_groups=check.getInt("id_groups");
+        }
+        switch (id_groups) {
+            case 1:
+                open_window("/TaskAgent/admin.fxml","Administrator");
+                break;
+            case 2:
+                open_window("/TaskAgent/supervisor.fxml","Supervisor");
+                break;
+            case 3:
+                open_window("/TaskAgent/user.fxml","User");
+                break;
         }
     }
     public void initialize(URL url, ResourceBundle rb) {
