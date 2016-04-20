@@ -11,11 +11,11 @@ public class Users {
         
     }
         
-    public void setId(int id) {
+    public void setUserId(int id) {
         this.user_id = id;
     }
     
-    public int getId() {
+    public int getUserId() {
         return this.user_id;
     }
 }
