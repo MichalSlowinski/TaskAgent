@@ -7,10 +7,10 @@ package taskagent;
 
 import TaskAgent.User;
  
-import java.util.Observable;
 
 
-public class WhoIm extends Observable {
+
+public class WhoIm {
     private static WhoIm instance = null;
     private User user;
 
