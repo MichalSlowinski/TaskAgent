@@ -46,19 +46,12 @@ public class FXMLLoginController  {
             Logger.getLogger(TaskAgent.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-       ResultSet check = dbc.Query("Select id_groups from user where login="+login+" and password="+password+";");                
+       ResultSet check = dbc.Query("Select id,id_groups from user where login="+login+" and password="+password+";");                
         dbc.close();
        try{
             
-               String[] arr = null;
-            while (check.next()) {
-                String em = check.getString("id_groups");
-               arr = em.split("\n");
-               
-            }
-             for (int i =0; i < arr.length; i++){
-                   System.out.println(arr[i]);}
-               /*
+           id_groups=check.getInt("id_groups");
+           
                 switch (id_groups) {
                     case 1:
                         open_window("/TaskAgent/admin.fxml","Administrator");
@@ -71,7 +64,7 @@ public class FXMLLoginController  {
                         break;
                 }
                 
-           */
+        
             
         } catch (SQLException ex) {
             Logger.getLogger(TaskAgent.class.getName()).log(Level.SEVERE, null, ex);
