@@ -52,13 +52,13 @@ public class FXMLLoginController  {
         }
         switch (id_groups) {
             case 1:
-                open_window("/TaskAgent/admin.fxml","Administrator");
+                open_window("/TaskAgent/FXMLAdmin.fxml","Administrator");
                 break;
             case 2:
-                open_window("/TaskAgent/supervisor.fxml","Supervisor");
+                open_window("/TaskAgent/FXMLSupervisor.fxml","Supervisor");
                 break;
             case 3:
-                open_window("/TaskAgent/user.fxml","User");
+                open_window("/TaskAgent/FXMLUser.fxml","User");
                 break;
         }
     }
