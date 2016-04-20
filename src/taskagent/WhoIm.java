@@ -5,14 +5,14 @@
  */
 package taskagent;
 
-import TaskAgent.Users;
+import TaskAgent.User;
  
 import java.util.Observable;
 
 
 public class WhoIm extends Observable {
     private static WhoIm instance = null;
-    private Users userid;
+    private User user;
 
     public static WhoIm getInstance()
 
@@ -23,12 +23,12 @@ public class WhoIm extends Observable {
         return instance;
     }
 
-    public Users getUserid() {
-        return userid;
+    public User getUserid() {
+        return user;
     }
 
-    public void setUserid(Users user) {
-        this.userid = user;
+    public void setUserid(User user) {
+        this.user = user;
     }
 
     
