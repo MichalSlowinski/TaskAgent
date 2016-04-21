@@ -14,7 +14,7 @@ public class FXMLSupervisorController {
 
     @FXML
     private URL location;
-//cuś
+
     @FXML
     private Button Logout;
 
