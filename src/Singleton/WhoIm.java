@@ -5,7 +5,7 @@
  */
 package Singleton;
 
-import TaskAgent.User;
+import Models.User;
 
 
 

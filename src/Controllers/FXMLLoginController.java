@@ -1,11 +1,12 @@
 package Controllers;
 
+import static Logic.WindowsOpener.*;
 import TaskAgent.DBConnection;
 import java.net.URL;
 import java.util.ResourceBundle;
 import TaskAgent.TaskAgent;
 import static TaskAgent.TaskAgent.*;
-import TaskAgent.User;
+import Models.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -59,13 +60,13 @@ public class FXMLLoginController  {
         WhoIm.getInstance().setUser(user);
         switch (id_groups) {
             case 1:
-                open_window("/TaskAgent/FXMLAdmin.fxml","Administrator");
+                open_window("/TaskAgent/FXMLAdmin.fxml","Administrator",true);
                 break;
             case 2:
-                open_window("/TaskAgent/FXMLSupervisor.fxml","Supervisor");
+                open_window("/TaskAgent/FXMLSupervisor.fxml","Supervisor",true);
                 break;
             case 3:
-                open_window("/TaskAgent/FXMLUser.fxml","User");
+                open_window("/TaskAgent/FXMLUser.fxml","User",true);
                 break;
         }
         

@@ -1,6 +1,6 @@
 package Controllers;
 
-import TaskAgent.TaskAgent;
+import Logic.WindowsOpener;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -20,7 +20,7 @@ public class FXMLSupervisorController {
 
     @FXML
     void HandleLogoutButtonAction(ActionEvent event) {
-        TaskAgent.logout();
+        WindowsOpener.logout();
     }
     /**
      * Initializes the controller class.

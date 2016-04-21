@@ -1,4 +1,4 @@
-package TaskAgent;
+package Models;
 
 public class User {
     
