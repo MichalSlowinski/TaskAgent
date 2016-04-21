@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 public class DBConnection {
@@ -30,7 +29,7 @@ public class DBConnection {
             System.err.println("Error: "+iae.getMessage());
         }
         conn = DriverManager.getConnection(url + dbName + parameters, user, pass);
-        System.out.println("Connected"); //TODO delete this line
+        
         return conn;
     }
 
@@ -48,7 +47,7 @@ public class DBConnection {
     public static void close() {
         try {
             conn.close();
-            System.out.println("Disconnected"); //TODO delete this line
+           
         } catch (SQLException e) {
             e.printStackTrace();
         }
