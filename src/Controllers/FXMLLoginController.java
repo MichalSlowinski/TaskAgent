@@ -69,7 +69,7 @@ public class FXMLLoginController  {
                 open_window("/TaskAgent/FXMLUser.fxml","User",true);
                 break;
         }
-        
+        dbc.close();
     }
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
