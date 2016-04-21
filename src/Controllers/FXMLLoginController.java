@@ -60,13 +60,13 @@ public class FXMLLoginController  {
         WhoIm.getInstance().setUser(user);
         switch (id_groups) {
             case 1:
-                open_window("/TaskAgent/FXMLAdmin.fxml","Administrator",true);
+                open("/TaskAgent/FXMLAdmin.fxml","Administrator",true);
                 break;
             case 2:
-                open_window("/TaskAgent/FXMLSupervisor.fxml","Supervisor",true);
+                open("/TaskAgent/FXMLSupervisor.fxml","Supervisor",true);
                 break;
             case 3:
-                open_window("/TaskAgent/FXMLUser.fxml","User",true);
+                open("/TaskAgent/FXMLUser.fxml","User",true);
                 break;
         }
         dbc.close();

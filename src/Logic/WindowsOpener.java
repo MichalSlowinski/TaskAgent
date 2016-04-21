@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Logic;
 
 
@@ -32,9 +28,9 @@ public class WindowsOpener {
     }
     
     public static void logout() {
-        open_window("/TaskAgent/FXMLLogin.fxml","FXMLLogin.fxml", false);
+        open("/TaskAgent/FXMLLogin.fxml","Login.fxml", false);
     }
-     public static void open_window(String window, String title, boolean resize) {
+     public static void open(String window, String title, boolean resize) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Logic.WindowsOpener.class.getClass().getResource(window));
             Parent root1 = (Parent) fxmlLoader.load();
@@ -48,7 +44,7 @@ public class WindowsOpener {
             }
             current = stage;
          } catch(Exception e) {
-             alert("Error","Nie można otwożyć okna "+e.getLocalizedMessage());
+             alert("Error","Nie można otwożyć okna ");
          }
     } 
 }

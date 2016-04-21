@@ -15,7 +15,7 @@ public class TaskAgent extends Application {
 
     public void start(Stage stage) throws Exception {
         
-        open_window("/TaskAgent/FXMLLogin.fxml","Login",false);
+        open("/TaskAgent/FXMLLogin.fxml","Login",false);
     }
   
     public static void main(String[] args) {
