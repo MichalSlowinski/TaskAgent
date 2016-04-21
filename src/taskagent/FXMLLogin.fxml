@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -17,6 +18,12 @@
             <PasswordField fx:id="pswd" layoutX="126.0" layoutY="88.0" onAction="#handleButtonAction" />
             <Label layoutX="57.0" layoutY="92.0" text="Password" />
          </children>
+         <effect>
+            <InnerShadow />
+         </effect>
       </AnchorPane>
    </children>
+   <effect>
+      <InnerShadow />
+   </effect>
 </Pane>

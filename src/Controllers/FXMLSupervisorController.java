@@ -1,25 +1,31 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controllers;
 
+import TaskAgent.TaskAgent;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 
-/**
- * FXML Controller class
- *
- * @author slowi
- */
-public class FXMLSupervisorController implements Initializable {
+public class FXMLSupervisorController {
 
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private Button Logout;
+
+    @FXML
+    void HandleLogoutButtonAction(ActionEvent event) {
+        TaskAgent.logout();
+    }
     /**
      * Initializes the controller class.
      */
-    @Override
+    
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
