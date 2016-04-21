@@ -34,12 +34,7 @@ public class DBConnection {
         return conn;
     }
 
-    /**
-     * Connection object getter
-     * @return current connection or null when connection object is null
-     * @throws SQLException
-     * @throws ClassNotFoundException
-     */
+    
     public static Connection getConnection() throws SQLException, ClassNotFoundException{
         if(conn !=null && !conn.isClosed())
             return conn;
