@@ -1,34 +1,53 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controllers;
 
+import TaskAgent.TaskAgent;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
-/**
- * FXML Controller class
- *
- * @author slowi
- */
-public class FXMLUserController implements Initializable {
-    
-private void StartTask(ActionEvent event) throws SQLException  {
-       
-        
-    }
-private void Finish(ActionEvent event) throws SQLException  {
-       
-        
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+
+public class FXMLUserController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private ListView<?> StartedTask;
+
+    @FXML
+    private Button StartTask;
+
+    @FXML
+    private Button Logout;
+
+    @FXML
+    private Button Finish;
+
+    @FXML
+    private ListView<?> WaitingTask;
+
+    @FXML
+    void HandleStartTaskButtonAction(ActionEvent event) {
+
     }
 
-    @Override
+    @FXML
+    void HandleFinishTaskButtonAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void HandleLogoutButtonAction(ActionEvent event) {
+     TaskAgent.logout();
+    }
+
+    @FXML
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
 }

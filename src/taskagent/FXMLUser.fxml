@@ -6,16 +6,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLUserController">
    <children>
       <AnchorPane prefHeight="400.0" prefWidth="600.0">
          <children>
-            <ListView layoutX="47.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" />
-            <ListView layoutX="334.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" />
-            <Button layoutX="259.0" layoutY="188.0" mnemonicParsing="false" text="Start task" />
-            <Button layoutX="408.0" layoutY="331.0" mnemonicParsing="false" text="Finish" />
-            <Button layoutX="121.0" layoutY="331.0" mnemonicParsing="false" text="Close" />
+            <ListView fx:id="WaitingTask" layoutX="47.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" />
+            <ListView fx:id="StartedTask" layoutX="334.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" />
+            <Button fx:id="StartTask" layoutX="259.0" layoutY="188.0" mnemonicParsing="false" onAction="#HandleStartTaskButtonAction" text="Start task" />
+            <Button fx:id="Finish" layoutX="408.0" layoutY="331.0" mnemonicParsing="false" onAction="#HandleFinishTaskButtonAction" text="Finish" />
+            <Button fx:id="Logout" layoutX="121.0" layoutY="331.0" mnemonicParsing="false" onAction="#HandleLogoutButtonAction" text="Logout" />
             <Label layoutX="102.0" layoutY="64.0" text="Waiting tasks" />
             <Label layoutX="408.0" layoutY="64.0" text="Starterd tasks" />
          </children>

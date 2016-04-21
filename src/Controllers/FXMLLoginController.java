@@ -14,7 +14,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import taskagent.WhoIm;
+import Singleton.WhoIm;
+
 
 public class FXMLLoginController  {
     
@@ -50,13 +51,12 @@ public class FXMLLoginController  {
        ResultSet check = dbc.Query("Select id_groups,id from user where login='"+login+"' and password='"+password+"';");                
         
         while(check.next()){
-            id_groups=check.getInt("id_groups");
-            user_id=check.getInt("id");
+            id_groups=check.getInt(1);
+            user_id=check.getInt(2);
         }
-        user=new User(user_id);
+    
+                user=new User(user_id);
         WhoIm.getInstance().setUser(user);
-        
-        
         switch (id_groups) {
             case 1:
                 open_window("/TaskAgent/FXMLAdmin.fxml","Administrator");
@@ -68,6 +68,7 @@ public class FXMLLoginController  {
                 open_window("/TaskAgent/FXMLUser.fxml","User");
                 break;
         }
+        
     }
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
