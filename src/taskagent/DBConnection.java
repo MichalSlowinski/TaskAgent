@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class DBConnection {
 	
-	private static Connection conn;
+    private static Connection conn;
     private static String url = "jdbc:mysql://sql7.freesqldatabase.com:3306/";
     private static String dbName = "sql7114809";
     private static String user = "sql7114809";
@@ -17,8 +17,7 @@ public class DBConnection {
 
     private static PreparedStatement preparedStatement = null;
 
-    
-    public static Connection connect() throws SQLException {
+    public DBConnection() throws SQLException {
         try{
             Class.forName("com.mysql.jdbc.Driver").newInstance();
         }catch(ClassNotFoundException cnfe){
@@ -29,28 +28,6 @@ public class DBConnection {
             System.err.println("Error: "+iae.getMessage());
         }
         conn = DriverManager.getConnection(url + dbName + parameters, user, pass);
-        
-        return conn;
-    }
-
-    
-    public static Connection getConnection() throws SQLException, ClassNotFoundException{
-        if(conn !=null && !conn.isClosed())
-            return conn;
-        connect();
-        return conn;
-    }
-
-    /**
-     * Method which close connection
-     */
-    public static void close() {
-        try {
-            conn.close();
-           
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     public static ResultSet Query(String query) { //TODO close resultSet somewhere
@@ -64,5 +41,4 @@ public class DBConnection {
         return resultSet;
     }
 
- 
 }

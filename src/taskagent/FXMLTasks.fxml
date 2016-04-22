@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLAdminController">
+   <children>
+      <AnchorPane id="AnchorPane" layoutX="9.0" layoutY="9.0" prefHeight="390.0" prefWidth="600.0">
+         <children>
+            <Label layoutX="279.0" layoutY="156.0" />
+            <Button fx:id="Back" layoutX="525.0" layoutY="354.0" mnemonicParsing="false" onAction="#HandleBackButtonAction" text="Back" />
+            <Label layoutX="14.0" layoutY="6.0" text="Nazwa Zadania:" />
+            <Label layoutX="14.0" layoutY="45.0" text="Opis Zadania:" />
+            <TextField layoutX="108.0" layoutY="2.0" prefHeight="25.0" prefWidth="412.0" />
+            <TextField layoutX="108.0" layoutY="41.0" prefHeight="25.0" prefWidth="412.0" />
+            <Button layoutX="525.0" layoutY="88.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="66.0" text="Dodaj" />
+            <Label layoutX="14.0" layoutY="91.0" text="Kierownik:" />
+            <ComboBox layoutX="108.0" layoutY="87.0" prefHeight="25.0" prefWidth="250.0" />
+            <TableView layoutX="7.0" layoutY="127.0" prefHeight="212.0" prefWidth="586.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="Nazwa" />
+                <TableColumn prefWidth="75.0" text="Opis" />
+              </columns>
+            </TableView>
+            <Button layoutX="7.0" layoutY="354.0" mnemonicParsing="false" text="Edytuj" />
+            <Button layoutX="65.0" layoutY="354.0" mnemonicParsing="false" text="Usuń" />
+         </children>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </AnchorPane>
+   </children>
+   <effect>
+      <InnerShadow />
+   </effect>
+</Pane>
