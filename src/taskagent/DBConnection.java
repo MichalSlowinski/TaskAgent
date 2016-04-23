@@ -40,5 +40,8 @@ public class DBConnection {
         }
         return resultSet;
     }
+    public void addTask(String name, String desc){
+        Query("insert into tasks(name,task)values('"+name+"','"+desc+"'');");
+    }
 
 }
