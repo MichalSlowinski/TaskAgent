@@ -1,5 +1,6 @@
 package Controllers;
 
+import Logic.Querys;
 import Logic.WindowsOpener;
 import Models.Task;
 import Models.User;
@@ -66,7 +67,7 @@ public class FXMLAdminController {
         String desc = task_desc.getText();
         int supervisor = task_supervisior.getSelectionModel().getSelectedItem().user_id;
         
-        db.addTask(name, desc, supervisor);
+        Querys.addTask(name, desc, supervisor);
     }
 
     void fillTaskTable() {
@@ -88,12 +89,12 @@ public class FXMLAdminController {
 
     @FXML
     void HandleUsersButtonAction(ActionEvent event) {
-        WindowsOpener.open("/TaskAgent/FxmlUserEdit.fxml", "Edit User", true);
+        WindowsOpener.open("/TaskAgent/FxmladdUser.fxml", "Add User", true);
     }
 
     @FXML
     void HandleTasksButtonAction(ActionEvent event) {
-        WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Edit User", true);
+        WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Tasks", true);
     }
 
     @FXML
