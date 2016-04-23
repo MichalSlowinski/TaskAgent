@@ -66,7 +66,7 @@ public class FXMLAdminController {
         String desc = task_desc.getText();
         int supervisor = task_supervisior.getSelectionModel().getSelectedItem().user_id;
         
-       // db.addTask(name, desc, supervisor);
+        db.addTask(name, desc, supervisor);
     }
 
     void fillTaskTable() {
