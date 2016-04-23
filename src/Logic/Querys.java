@@ -19,4 +19,7 @@ public class Querys {
     public static void FinishTask(String Status, int id){
         Query("update tasks set status='"+Status+"' where id="+id+"");
     }
+    public static void AddUser(String Status, int id){
+        Query("");
+}
 }

@@ -89,7 +89,7 @@ public class FXMLAdminController {
 
     @FXML
     void HandleUsersButtonAction(ActionEvent event) {
-        WindowsOpener.open("/TaskAgent/FxmladdUser.fxml", "Add User", true);
+        WindowsOpener.open("/TaskAgent/FxmladdUser.fxml", "User", true);
     }
 
     @FXML
@@ -101,9 +101,14 @@ public class FXMLAdminController {
     void HandleBackButtonAction(ActionEvent event) {
         WindowsOpener.open("/TaskAgent/FXMLAdmin.fxml", "Administrator", false);
     }
+    @FXML
+    void AddUserHandler(ActionEvent event){
+        
+    }
 
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
+    
 
 }
