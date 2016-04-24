@@ -3,8 +3,11 @@ package Controllers;
 import Logic.Querys;
 import Logic.WindowsOpener;
 import Models.Task;
-import Models.User;
-import static TaskAgent.TaskAgent.db;
+import TaskAgent.DBConnection;
+import static TaskAgent.DBConnection.Execute;
+
+import static TaskAgent.TaskAgent.user_state;
+import static TaskAgent.TaskAgent.actual_option;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,68 +16,42 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class FXMLAdminController {
-
-    @FXML
-    private ComboBox<?> Supervisor;
-
-    @FXML
-    private ComboBox<?> Group;
-
-    @FXML
-    private TextField Email;
-
-    @FXML
-    private TextField FirstName;
-
-    @FXML
-    private Button Back;
-
-    @FXML
-    private TextField LastName;
-
-    @FXML
-    private TextField Login;
-
-    @FXML
-    private Button Confrim;
-
-    @FXML
-    private PasswordField AddPassword;
-    
+public class FXMLAdminController implements Initializable {
     @FXML
     private ResourceBundle resources;
-
     @FXML
     private URL location;
-    
     @FXML
     private TextField task_name, task_desc;
-    
     @FXML
-    private ComboBox<User> task_supervisior;
-
+    private ComboBox task_supervisior;
     @FXML
     private Button Tasks;
-
     @FXML
     private Label LogAs;
-
     @FXML
     private Button Logout;
+    @FXML
+    private Button Users, task_button;
+    @FXML
+    private Button Back;
+    @FXML
+    private Button Delete;
 
     @FXML
-    private Button Users;
-   
+    private Button AddTask;
+    
+    @FXML
+    private Button EditTask;
     @FXML
     private TableView<Task> task_table = new TableView<>();
     @FXML
@@ -89,59 +66,92 @@ public class FXMLAdminController {
 
     @FXML
     void addTaskButton(ActionEvent event) {
-        String si;
         String name = task_name.getText();
         String desc = task_desc.getText();
-        int supervisor = task_supervisior.getSelectionModel().getSelectedItem().user_id;
-        
-        Querys.addTask(name, desc, supervisor);
+        String[] supervisor = task_supervisior.getSelectionModel().getSelectedItem().toString().split(" ");
+        if(actual_option == 0) {
+            Querys.addTask(name, desc, supervisor);
+        } else {
+            Querys.editTask(actual_option, name, desc);
+            actual_option = 0;
+            task_button.setText("Dodaj");
+        }
+    }
+    
+    @FXML
+    void deleteTaskButton(ActionEvent event) {
+        int id = task_table.getSelectionModel().getSelectedItem().getId();
+        if(id > 0) {
+            Execute("DELETE FROM tasks WHERE id = "+id);
+            WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Tasks", true);
+        }
     }
 
     void fillTaskTable() {
-        ResultSet p = db.Query("SELECT * FROM tasks");
+        ResultSet p = DBConnection.Query("SELECT * FROM tasks");
         data1.clear();
         task_table.setEditable(true);
         try {
-            
-            while (p.next()) {
-                data1.add(new Task(p.getInt("id"),p.getString("name"),p.getString("desc")));
+            while(p.next()) {
+                data1.add(new Task(p.getInt("id"),p.getString("name"),p.getString("description")));
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colDesc.setCellValueFactory(new PropertyValueFactory<>("desc"));
+        colDesc.setCellValueFactory(new PropertyValueFactory<>("description"));
         task_table.setItems(data1);
+    }
+    
+    @FXML
+    void editTask(ActionEvent event) {
+        Task task = task_table.getSelectionModel().getSelectedItem();
+        if(task.getId() > 0) {
+            actual_option = task.getId();
+            task_button.setText("Edytuj");
+            task_name.setText(task.getName());
+            task_desc.setText(task.getDescription());
+        }
     }
 
     @FXML
+    void HandleAddUserButtonAction(ActionEvent event) {
+        user_state = 3;
+        WindowsOpener.open("/TaskAgent/FXMLaddUsers.fxml", "Users", true);
+    }
+    @FXML
     void HandleEditUserButtonAction(ActionEvent event) {
-        WindowsOpener.open("/TaskAgent/FxmlEditUser.fxml", "Edit User", true);
+        user_state = 3;
+        WindowsOpener.open("/TaskAgent/FXMLaddUsers.fxml", "Users", true);
     }
 
     @FXML
     void HandleTasksButtonAction(ActionEvent event) {
+        user_state = 1;
         WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Tasks", true);
     }
 
     @FXML
     void HandleBackButtonAction(ActionEvent event) {
+        user_state = 0;
         WindowsOpener.open("/TaskAgent/FXMLAdmin.fxml", "Administrator", false);
     }
-    
-    @FXML
-    void HandleAddUserButtonAction(ActionEvent event){
-        WindowsOpener.open("/TaskAgent/FXMLaddUser.fxml","Add User",false);
-    }
-    @FXML
-    void AddUserHandler(ActionEvent event){
-        
-      //  Querys.AddUser(FirstName, LastName, Login, AddPassword, Email, 2,  Supervisor.getSelectionModel().getSelectedItem().Supervisor);
-    }
 
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        if(user_state == 1) {
+            fillTaskTable();
+            ResultSet p = DBConnection.Query("SELECT * FROM users");
+            try {
+                while (p.next()) {
+                    task_supervisior.getItems().add(
+                        p.getString("firstname") + " " + p.getString("lastname")
+                    );
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
-    
 
 }

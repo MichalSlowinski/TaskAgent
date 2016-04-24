@@ -5,7 +5,10 @@
  */
 package Logic;
 
+import static TaskAgent.DBConnection.Execute;
 import static TaskAgent.DBConnection.Query;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -13,13 +16,26 @@ import static TaskAgent.DBConnection.Query;
  */
 public class Querys {
     
-    public static void addTask(String name, String desc, int SupervisorId){
-        Query("insert into tasks(name,task,id_supervisor)values('"+name+"','"+desc+"',"+SupervisorId+");");
+      public static void addTask(String name, String desc, String[] supervisor) {
+        if(!name.equals("") && !desc.equals("")) {
+            ResultSet m = Query("SELECT * FROM users WHERE firstname = '" + supervisor[0] + "' AND lastname = '" + supervisor[1] + "';");
+            try {
+                if (m.next()) {
+                    Execute("INSERT INTO `tasks` (`name`, `description`, `id_supervisor`, `date_start`, `date_end`, `execution_time`, `status`) "
+                          + "VALUES ('"+name+"', '"+desc+"', '"+m.getInt("id")+"', '2016-04-06 00:00:00', '2016-04-06 00:00:00', '2016-04-06 00:00:00', '1');");
+                    WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Tasks", true);
+                } else {
+                    WindowsOpener.alert("Błąd", "Wypełnij wszystkie dane!");
+                }
+            } catch (SQLException ex) {
+                
+            }
+        }
     }
-    public static void FinishTask(String Status, int id){
-        Query("update tasks set status='"+Status+"' where id="+id+";");
+    
+    public static void editTask(int id, String name, String desc) {
+        Execute("UPDATE tasks SET name = \""+name+"\", description = \""+desc+"\" WHERE id = "+id);
+        WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Tasks", true);
     }
-    public static void AddUser(String firstname,String lastname,String login, String password, String email, int id_groups, int id_supervisor){
-        Query("Insert into users(firstname,lastname,login,password,email,id_groups,id_supervisor) values('"+firstname+"','"+lastname+"','"+login+"','"+password+"','"+email+"',"+id_groups+","+id_supervisor+");");
-}
+    
 }
