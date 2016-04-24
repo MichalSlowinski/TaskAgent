@@ -37,5 +37,9 @@ public class Querys {
         Execute("UPDATE tasks SET name = \""+name+"\", description = \""+desc+"\" WHERE id = "+id);
         WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Tasks", true);
     }
+    public static void AddUser(String firstname,String lastname,String login, String password, String email, int id_groups, String[] supervisor) throws SQLException{
+        ResultSet m = Query("SELECT * FROM users WHERE firstname = '" + supervisor[0] + "' AND lastname = '" + supervisor[1] + "';");
+        Execute("Insert into users(firstname,lastname,login,password,email,id_groups,id_supervisor) values('"+firstname+"','"+lastname+"','"+login+"','"+password+"','"+email+"',"+id_groups+","+m.getInt("id")+");");
+  }
     
 }
