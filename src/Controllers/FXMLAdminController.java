@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -23,6 +24,33 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class FXMLAdminController {
 
+    @FXML
+    private ComboBox<?> Supervisor;
+
+    @FXML
+    private ComboBox<?> Group;
+
+    @FXML
+    private TextField Email;
+
+    @FXML
+    private TextField FirstName;
+
+    @FXML
+    private Button Back;
+
+    @FXML
+    private TextField LastName;
+
+    @FXML
+    private TextField Login;
+
+    @FXML
+    private Button Confrim;
+
+    @FXML
+    private PasswordField AddPassword;
+    
     @FXML
     private ResourceBundle resources;
 
@@ -46,8 +74,7 @@ public class FXMLAdminController {
 
     @FXML
     private Button Users;
-    @FXML
-    private Button Back;
+   
     @FXML
     private TableView<Task> task_table = new TableView<>();
     @FXML
@@ -88,8 +115,8 @@ public class FXMLAdminController {
     }
 
     @FXML
-    void HandleUsersButtonAction(ActionEvent event) {
-        WindowsOpener.open("/TaskAgent/FxmladdUser.fxml", "User", true);
+    void HandleEditUserButtonAction(ActionEvent event) {
+        WindowsOpener.open("/TaskAgent/FxmlEditUser.fxml", "Edit User", true);
     }
 
     @FXML
@@ -101,9 +128,15 @@ public class FXMLAdminController {
     void HandleBackButtonAction(ActionEvent event) {
         WindowsOpener.open("/TaskAgent/FXMLAdmin.fxml", "Administrator", false);
     }
+    
+    @FXML
+    void HandleAddUserButtonAction(ActionEvent event){
+        WindowsOpener.open("/TaskAgent/FXMLaddUser.fxml","Add User",false);
+    }
     @FXML
     void AddUserHandler(ActionEvent event){
         
+      //  Querys.AddUser(FirstName, LastName, Login, AddPassword, Email, 2,  Supervisor.getSelectionModel().getSelectedItem().Supervisor);
     }
 
     public void initialize(URL url, ResourceBundle rb) {

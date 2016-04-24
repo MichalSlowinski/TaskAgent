@@ -41,12 +41,6 @@ public class FXMLUserController {
     private Button Finish;
 
     
-
-    public static final ObservableList WaitingTasks = 
-        FXCollections.observableArrayList();
-
-    public static final ObservableList StartedTasks = 
-        FXCollections.observableArrayList();
     
     @FXML
     void HandleStartTaskButtonAction(ActionEvent event) {
@@ -64,9 +58,7 @@ public class FXMLUserController {
     }
     @FXML
     void HandleLoadTasksButtonAction(ActionEvent event) {
-        WaitingTasks.add("coś");
-        ListView Waitinglist = new ListView();
-    Waitinglist.setItems(WaitingTasks);
+        
     }
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
