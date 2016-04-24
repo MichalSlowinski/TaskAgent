@@ -2,6 +2,7 @@
 package Logic;
 
 
+import TaskAgent.TaskAgent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -30,15 +31,16 @@ public class WindowsOpener {
     public static void logout() {
         open("/TaskAgent/FXMLLogin.fxml","Login.fxml", false);
     }
-     public static void open(String window, String title, boolean resize) {
+
+    public static void open(String window, String title, boolean resize) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Logic.WindowsOpener.class.getClass().getResource(window));
+            FXMLLoader fxmlLoader = new FXMLLoader(WindowsOpener.class.getClass().getResource(window));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));  
             stage.show();
-            stage.setResizable(resize);
             stage.setTitle(title);
+            stage.setResizable(resize);
             if(current != null) {
                 close_window();
             }
@@ -46,5 +48,5 @@ public class WindowsOpener {
          } catch(Exception e) {
              alert("Error","Nie można otwożyć okna ");
          }
-    } 
+    }
 }

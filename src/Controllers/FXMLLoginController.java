@@ -35,6 +35,7 @@ public class FXMLLoginController {
             id_groups = check.getInt(1);
             user_id = check.getInt(2);
             user = new User(user_id);
+            user_state = 0;
             WhoIm.getInstance().setUser(user);
             
             switch (id_groups) {

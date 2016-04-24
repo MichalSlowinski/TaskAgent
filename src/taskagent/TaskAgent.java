@@ -10,9 +10,10 @@ public class TaskAgent extends Application {
     public static DBConnection db;
     public static int id_groups;
     public static int user_id;
-    public static int user_state;
-    public static int actual_option;
+    public static int user_state = 0;
+    public static int actual_option = 0;
 
+    @Override
     public void start(Stage stage) throws Exception {
         db = new DBConnection();
         open("/TaskAgent/FXMLLogin.fxml","Login",false);

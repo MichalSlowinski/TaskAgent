@@ -3,9 +3,9 @@ package Controllers;
 import Logic.Querys;
 import Logic.WindowsOpener;
 import Models.Task;
-import TaskAgent.DBConnection;
 import static TaskAgent.DBConnection.Execute;
-
+import static TaskAgent.DBConnection.Query;
+import static TaskAgent.TaskAgent.db;
 import static TaskAgent.TaskAgent.user_state;
 import static TaskAgent.TaskAgent.actual_option;
 import java.net.URL;
@@ -45,14 +45,6 @@ public class FXMLAdminController implements Initializable {
     @FXML
     private Button Back;
     @FXML
-    private Button Delete;
-
-    @FXML
-    private Button AddTask;
-    
-    @FXML
-    private Button EditTask;
-    @FXML
     private TableView<Task> task_table = new TableView<>();
     @FXML
     private ObservableList<Task> data1 = FXCollections.observableArrayList();
@@ -88,7 +80,7 @@ public class FXMLAdminController implements Initializable {
     }
 
     void fillTaskTable() {
-        ResultSet p = DBConnection.Query("SELECT * FROM tasks");
+        ResultSet p = db.Query("SELECT * FROM tasks");
         data1.clear();
         task_table.setEditable(true);
         try {
@@ -115,14 +107,9 @@ public class FXMLAdminController implements Initializable {
     }
 
     @FXML
-    void HandleAddUserButtonAction(ActionEvent event) {
+    void HandleUsersButtonAction(ActionEvent event) {
         user_state = 3;
-        WindowsOpener.open("/TaskAgent/FXMLaddUsers.fxml", "Users", true);
-    }
-    @FXML
-    void HandleEditUserButtonAction(ActionEvent event) {
-        user_state = 3;
-        WindowsOpener.open("/TaskAgent/FXMLaddUsers.fxml", "Users", true);
+        WindowsOpener.open("/TaskAgent/FXMLUsers.fxml", "Users", true);
     }
 
     @FXML
@@ -141,7 +128,7 @@ public class FXMLAdminController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         if(user_state == 1) {
             fillTaskTable();
-            ResultSet p = DBConnection.Query("SELECT * FROM users");
+            ResultSet p = db.Query("SELECT * FROM users");
             try {
                 while (p.next()) {
                     task_supervisior.getItems().add(
