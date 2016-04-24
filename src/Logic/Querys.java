@@ -17,9 +17,9 @@ public class Querys {
         Query("insert into tasks(name,task,id_supervisor)values('"+name+"','"+desc+"',"+SupervisorId+");");
     }
     public static void FinishTask(String Status, int id){
-        Query("update tasks set status='"+Status+"' where id="+id+"");
+        Query("update tasks set status='"+Status+"' where id="+id+";");
     }
-    public static void AddUser(String Status, int id){
-        Query("");
+    public static void AddUser(String firstname,String lastname,String login, String password, String email, int id_groups, int id_supervisor){
+        Query("Insert into users(firstname,lastname,login,password,email,id_groups,id_supervisor) values('"+firstname+"','"+lastname+"','"+login+"','"+password+"','"+email+"',"+id_groups+","+id_supervisor+");");
 }
 }

@@ -40,8 +40,6 @@ public class DBConnection {
         }
         return resultSet;
     }
-    /*public void addTask(String name, String desc, int SupervisorId){
-        Query("insert into tasks(name,task,id_supervisor)values('"+name+"','"+desc+"',"+SupervisorId+");");
-    }*/
+    
 
 }
