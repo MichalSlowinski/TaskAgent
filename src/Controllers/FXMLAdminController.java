@@ -4,7 +4,6 @@ import Logic.Querys;
 import Logic.WindowsOpener;
 import Models.Task;
 import static TaskAgent.DBConnection.Execute;
-import static TaskAgent.DBConnection.Query;
 import static TaskAgent.TaskAgent.db;
 import static TaskAgent.TaskAgent.user_state;
 import static TaskAgent.TaskAgent.actual_option;
@@ -26,6 +25,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class FXMLAdminController implements Initializable {
+    @FXML
+    private Button AddUser;
     @FXML
     private ResourceBundle resources;
     @FXML
@@ -122,6 +123,19 @@ public class FXMLAdminController implements Initializable {
     void HandleBackButtonAction(ActionEvent event) {
         user_state = 0;
         WindowsOpener.open("/TaskAgent/FXMLAdmin.fxml", "Administrator", false);
+    }
+    @FXML
+    void HandleAddUserWindow(ActionEvent event){
+        user_state=0;
+        WindowsOpener.open("/TaskAgent/FXMLaddUser.fxml","Add User",true);    }
+    @FXML
+    void HandleBackToUserButtonAction(ActionEvent event){
+        user_state=0;
+        WindowsOpener.open("/TaskAgent/FXMLUsers.fxml","Users",false);
+    }
+    @FXML
+    void ConfrimUserHandler(ActionEvent event){
+      //  Querys.addUser();//TODO add User method
     }
 
     @Override

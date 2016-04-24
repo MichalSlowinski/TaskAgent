@@ -53,7 +53,7 @@ public class DBConnection {
         }
     }
 
-    public static void addTask(String name, String desc, String[] supervisor) {
+   /* public static void addTask(String name, String desc, String[] supervisor) {
         if(!name.equals("") && !desc.equals("")) {
             ResultSet m = Query("SELECT * FROM users WHERE firstname = '" + supervisor[0] + "' AND lastname = '" + supervisor[1] + "';");
             try {
@@ -68,7 +68,7 @@ public class DBConnection {
                 
             }
         }
-    }
+    }*/
     
     public static void editTask(int id, String name, String desc) {
         Execute("UPDATE tasks SET name = \""+name+"\", description = \""+desc+"\" WHERE id = "+id);
