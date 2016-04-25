@@ -15,14 +15,14 @@
       <Label layoutX="37.0" layoutY="194.0" text="Email" />
       <Label layoutX="33.0" layoutY="236.0" text="Supervisor" />
       <Label layoutX="34.0" layoutY="276.0" text="Group" />
-      <ComboBox fx:id="Group" layoutX="144.0" layoutY="272.0" onAction="#ConfrimUserHandler" prefWidth="150.0" />
-      <ComboBox fx:id="Supervisor" layoutX="145.0" layoutY="232.0" onAction="#ConfrimUserHandler" prefWidth="150.0" />
-      <TextField fx:id="LastName" layoutX="145.0" layoutY="62.0" onAction="#ConfrimUserHandler" />
-      <TextField fx:id="Login" layoutX="145.0" layoutY="106.0" onAction="#ConfrimUserHandler" />
-      <TextField fx:id="FirstName" layoutX="145.0" layoutY="19.0" onAction="#ConfrimUserHandler" />
-      <TextField fx:id="Email" layoutX="144.0" layoutY="190.0" onAction="#ConfrimUserHandler" />
-      <PasswordField fx:id="Password" layoutX="144.0" layoutY="146.0" onAction="#ConfrimUserHandler" />
+      <ComboBox fx:id="UserGroup" layoutX="144.0" layoutY="272.0" onAction="#ConfrimUserHandler" prefWidth="150.0" />
+      <ComboBox fx:id="UserSupervisor" layoutX="145.0" layoutY="232.0" onAction="#ConfrimUserHandler" prefWidth="150.0" />
+      <TextField fx:id="UserFirstName" layoutX="145.0" layoutY="19.0" onAction="#ConfrimUserHandler" />
+      <TextField fx:id="UserLastName" layoutX="145.0" layoutY="62.0" onAction="#ConfrimUserHandler" />
+      <TextField fx:id="UserLogin" layoutX="145.0" layoutY="106.0" onAction="#ConfrimUserHandler" />
+      <PasswordField fx:id="UserPassword" layoutX="144.0" layoutY="146.0" onAction="#ConfrimUserHandler" />
+      <TextField fx:id="UserEmail" layoutX="144.0" layoutY="190.0" onAction="#ConfrimUserHandler" />
+      <Button fx:id="UserConfrim" layoutX="180.0" layoutY="312.0" mnemonicParsing="false" onAction="#ConfrimUserHandler" text="Confrim" />
       <Button fx:id="BackToUser" layoutX="339.0" layoutY="312.0" mnemonicParsing="false" onAction="#HandleBackToUserButtonAction" text="Back" />
-      <Button fx:id="Confrim" layoutX="180.0" layoutY="312.0" mnemonicParsing="false" onAction="#ConfrimUserHandler" text="Confrim" />
    </children>
 </AnchorPane>
