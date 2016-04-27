@@ -7,6 +7,7 @@ package Logic;
 
 import static TaskAgent.DBConnection.Execute;
 import static TaskAgent.DBConnection.Query;
+import TaskAgent.TaskAgent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -40,10 +41,25 @@ public class Querys {
         Execute("UPDATE tasks SET name = \""+name+"\", description = \""+desc+"\" WHERE id = "+id);
         WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Tasks", true);
     }
-    public static void addUser(String firstname,String lastname,String login, String password, String email, String group, String[] supervisor) throws SQLException{
-        ResultSet sp = Query("SELECT * FROM users WHERE firstname = '" + supervisor[0] + "' AND lastname = '" + supervisor[1] + "';");
-        ResultSet gp = Query("Select id from groups where position='"+group+"';");
-        Execute("Insert into users(firstname,lastname,login,password,email,id_groups,id_supervisor) values('"+firstname+"','"+lastname+"','"+login+"','"+password+"','"+email+"','"+gp.getInt("id")+"',"+sp.getInt("id")+");");
-  }
+
+    public static void AddUser(String firstname, String lastname, String login, String password, String email, int group) {
+        if(!firstname.equals("") && !lastname.equals("") && !login.equals("") && !password.equals("") && !email.equals("") && group > 0) {
+            Execute("INSERT INTO `users` (`firstname`, `lastname`, `login`, `password`, `email`, `id_groups`, `id_supervisor`) " +
+                    " VALUES ('"+firstname+"', '"+lastname+"', '"+login+"', '"+password+"', '"+email+"', '"+group+"', '0');");
+            TaskAgent.user_state = 3;
+            WindowsOpener.open("/TaskAgent/FXMLUsers.fxml", "Tasks", true);
+        } else
+            WindowsOpener.alert("Błąd", "Wypełnij wszystkie dane!");
+    }
+    
+    public static void editUser(int id, String firstname, String lastname, String login, String password, String email, int group) {
+        if(!firstname.equals("") && !lastname.equals("") && !login.equals("") && !password.equals("") && !email.equals("") && group > 0) {
+            Execute("UPDATE users SET password = '"+password+"', email = '"+email+"', id_groups = '"+group+"', login = '"+login+"', firstname = '"+firstname+"', lastname = '"+lastname+"' WHERE id = "+id);
+            TaskAgent.user_state = 3;
+            TaskAgent.actual_option = 0;
+            WindowsOpener.open("/TaskAgent/FXMLUsers.fxml", "Tasks", true);
+        } else
+            WindowsOpener.alert("Błąd", "Wypełnij wszystkie dane!");
+    }
     
 }

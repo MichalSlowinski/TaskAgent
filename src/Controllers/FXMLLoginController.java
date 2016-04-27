@@ -29,23 +29,23 @@ public class FXMLLoginController {
     }
 
     public static void login(String login, String password) throws SQLException {
-        ResultSet check = db.Query("Select id_groups,id from users where login='" + login + "' and password='" + password + "';");
+        ResultSet check = db.Query("Select * from users where login='" + login + "' and password='" + password + "';");
 
         if(check.next()) {
-            id_groups = check.getInt(1);
-            user_id = check.getInt(2);
-            user = new User(user_id);
+            id_groups = check.getInt("id_groups");
+            user_id = check.getInt("id");
+            user = new User(user_id, check.getString("firstname"), check.getString("lastname"), id_groups);
             user_state = 0;
             WhoIm.getInstance().setUser(user);
             
             switch (id_groups) {
-                case 1:
+                case 3:
                     open("/TaskAgent/FXMLAdmin.fxml", "Administrator", false);
                     break;
                 case 2:
                     open("/TaskAgent/FXMLSupervisor.fxml", "Supervisor", true);
                     break;
-                case 3:
+                case 1:
                     open("/TaskAgent/FXMLUser.fxml", "User", true);
                     break;
             }

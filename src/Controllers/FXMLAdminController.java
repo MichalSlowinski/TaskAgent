@@ -3,6 +3,7 @@ package Controllers;
 import Logic.Querys;
 import Logic.WindowsOpener;
 import Models.Task;
+import Models.User;
 import static TaskAgent.DBConnection.Execute;
 import static TaskAgent.TaskAgent.db;
 import static TaskAgent.TaskAgent.user_state;
@@ -11,6 +12,8 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,7 +22,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -33,9 +35,9 @@ public class FXMLAdminController implements Initializable {
     @FXML
     private URL location;
     @FXML
-    private TextField task_name, task_desc;
+    private TextField task_name, task_desc, LastName, Login, Email, FirstName, Password;
     @FXML
-    private ComboBox task_supervisior, task_user;
+    private ComboBox task_supervisior, task_user, comboGroup;
     @FXML
     private Button Tasks;
     @FXML
@@ -47,35 +49,15 @@ public class FXMLAdminController implements Initializable {
     @FXML
     private Button Back;
     @FXML
-    private ComboBox UserSupervisor, UserGroup;
-
-    @FXML
-    private TextField UserLastName;
-
-    @FXML
-    private PasswordField UserPassword;
-
-    @FXML
-    private TextField UserFirstName;
-
-    @FXML
-    private Button BackToUser;
-
-    @FXML
-    private Button UserConfrim;
-
-    @FXML
-    private TextField UserEmail;
-
-    @FXML
-    private TextField UserLogin;
-
-    @FXML
     private TableView<Task> task_table = new TableView<>();
     @FXML
     private ObservableList<Task> data1 = FXCollections.observableArrayList();
     @FXML
-    public TableColumn colName, colDesc, colSupervisor, colUser;
+    private TableView<User> table_users = new TableView<>();
+    @FXML
+    private ObservableList<User> data2 = FXCollections.observableArrayList();
+    @FXML
+    public TableColumn colName, colDesc, colSupervisor, colUser, colFirstName, colGroup, colLastName;
 
     @FXML
     void HandleLogoutButtonAction(ActionEvent event) {
@@ -97,6 +79,15 @@ public class FXMLAdminController implements Initializable {
         }
     }
     
+    @FXML
+    void handleDeleteUser(ActionEvent event) {
+        int id = table_users.getSelectionModel().getSelectedItem().getId();
+        if(id > 0) {
+            Execute("DELETE FROM users WHERE id = "+id);
+            WindowsOpener.open("/TaskAgent/FXMLUsers.fxml", "Tasks", true);
+        }
+    }
+
     @FXML
     void deleteTaskButton(ActionEvent event) {
         int id = task_table.getSelectionModel().getSelectedItem().getId();
@@ -122,6 +113,23 @@ public class FXMLAdminController implements Initializable {
         colSupervisor.setCellValueFactory(new PropertyValueFactory<>("supervisor"));
         colUser.setCellValueFactory(new PropertyValueFactory<>("user"));
         task_table.setItems(data1);
+    }
+    
+    void fillUserTable() {
+        ResultSet p = db.Query("SELECT * FROM users");
+        data2.clear();
+        table_users.setEditable(true);
+        try {
+            while(p.next()) {
+                data2.add(new User(p.getInt("id"), p.getString("firstname"), p.getString("lastname"), p.getInt("id_groups")));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        colFirstName.setCellValueFactory(new PropertyValueFactory<>("firstname"));
+        colLastName.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+        colGroup.setCellValueFactory(new PropertyValueFactory<>("groupname"));
+        table_users.setItems(data2);
     }
     
     @FXML
@@ -152,25 +160,35 @@ public class FXMLAdminController implements Initializable {
         user_state = 0;
         WindowsOpener.open("/TaskAgent/FXMLAdmin.fxml", "Administrator", false);
     }
+ 
     @FXML
-    void HandleAddUserWindow(ActionEvent event){
-        user_state=0;
-        WindowsOpener.open("/TaskAgent/FXMLaddUser.fxml","Add User",false);    }
+    void HandleAddUserWindow(ActionEvent event) {
+        user_state = 9;
+        WindowsOpener.open("/TaskAgent/FXMLaddUser.fxml","Add User",true);
+    }
+    
+    @FXML
+    void HandleEditUserWindow(ActionEvent event) {
+        int id = table_users.getSelectionModel().getSelectedItem().getId();
+        if(id > 0) {
+            actual_option = id;
+            user_state = 10;
+            WindowsOpener.open("/TaskAgent/FXMLaddUser.fxml","Add User",true);
+        }
+    }
+
     @FXML
     void HandleBackToUserButtonAction(ActionEvent event){
-        user_state=0;
+        user_state = 3;
         WindowsOpener.open("/TaskAgent/FXMLUsers.fxml","Users",false);
     }
+
     @FXML
-    void ConfrimUserHandler(ActionEvent event) throws SQLException{
-        String ufn= UserFirstName.getText();
-        String uln= UserLastName.getText();
-        String ul= UserLogin.getText();
-        String up= UserPassword.getText();
-        String ue= UserEmail.getText();
-        String[] Usersupervisor = UserSupervisor.getSelectionModel().getSelectedItem().toString().split(" ");
-        String Usergroup = UserGroup.getSelectionModel().getSelectedItem().toString();
-       Querys.addUser(ufn,uln,ul,up,ue,Usergroup,Usersupervisor);//TODO add User method
+    void ConfrimUserHandler(ActionEvent event){
+        if(actual_option == 0)
+            Querys.AddUser(FirstName.getText(), LastName.getText(), Login.getText(), Password.getText(), Email.getText(), comboGroup.getSelectionModel().getSelectedIndex() + 1);
+        else
+            Querys.editUser(actual_option, FirstName.getText(), LastName.getText(), Login.getText(), Password.getText(), Email.getText(), comboGroup.getSelectionModel().getSelectedIndex() + 1);
     }
 
     @Override
@@ -189,6 +207,29 @@ public class FXMLAdminController implements Initializable {
                 }
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
+            }
+        } else if(user_state == 3) {
+            fillUserTable();
+        } else if(user_state == 9) {
+            comboGroup.getItems().addAll(
+                "User", "Supervisor", "Administrator"
+            );
+        } else if(user_state == 10) {
+            comboGroup.getItems().addAll(
+                "User", "Supervisor", "Administrator"
+            );
+            ResultSet user = db.Query("SELECT * FROM users WHERE id = "+actual_option);
+            try {
+                if(user.next()) {
+                    FirstName.setText(user.getString("firstname"));
+                    LastName.setText(user.getString("lastname"));
+                    Email.setText(user.getString("email"));
+                    Login.setText(user.getString("login"));
+                    Password.setText(user.getString("password"));
+                    comboGroup.getSelectionModel().select(user.getInt("id_groups") - 1);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(FXMLAdminController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

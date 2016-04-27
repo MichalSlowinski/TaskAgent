@@ -46,7 +46,7 @@ public class WindowsOpener {
             }
             current = stage;
          } catch(Exception e) {
-             alert("Error","Nie można otwożyć okna ");
+             alert("Error","Nie można otwożyć okna " + e.getMessage());
          }
     }
 }
