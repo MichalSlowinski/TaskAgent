@@ -7,19 +7,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <Pane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLSupervisorController">
    <children>
-      <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0">
-         <effect>
-            <InnerShadow />
-         </effect>
+      <AnchorPane prefHeight="417.0" prefWidth="600.0">
          <children>
-            <Button fx:id="Logout" layoutX="516.0" layoutY="351.0" mnemonicParsing="false" onAction="#HandleLogoutButtonAction" text="Logout" />
+            <TableView fx:id="task_table" layoutX="14.0" layoutY="14.0" prefHeight="344.0" prefWidth="575.0">
+              <columns>
+                <TableColumn fx:id="colName" prefWidth="128.0" text="Nazwa" />
+                <TableColumn fx:id="colDesc" prefWidth="190.0" text="Opis" />
+                  <TableColumn fx:id="colSupervisor" prefWidth="256.0" text="Kierownik" />
+              </columns>
+            </TableView>
+            <Button layoutX="529.0" layoutY="374.0" mnemonicParsing="false" onAction="#HandleLogoutButtonAction" text="Wyloguj" />
+            <Button layoutX="14.0" layoutY="374.0" mnemonicParsing="false" onAction="#editTask" text="Edytuj" />
+            <Button layoutX="75.0" layoutY="374.0" mnemonicParsing="false" onAction="#showTask" text="Pokaż" />
+            <Button layoutX="137.0" layoutY="374.0" mnemonicParsing="false" text="Usuń" />
          </children>
       </AnchorPane>
    </children>
-   <effect>
-      <InnerShadow />
-   </effect>
 </Pane>

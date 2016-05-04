@@ -9,9 +9,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="205.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLAdminController">
    <children>
-      <Button fx:id="Logout" layoutX="337.0" layoutY="166.0" mnemonicParsing="false" onAction="#HandleLogoutButtonAction" text="Logout" />
-      <Button fx:id="Users" layoutX="74.0" layoutY="66.0" mnemonicParsing="false" onAction="#HandleUsersButtonAction" prefHeight="73.0" prefWidth="107.0" text="Users" />
-      <Button fx:id="Tasks" layoutX="219.0" layoutY="66.0" mnemonicParsing="false" onAction="#HandleTasksButtonAction" prefHeight="73.0" prefWidth="107.0" text="Tasks" />
+      <Button fx:id="Logout" layoutX="337.0" layoutY="166.0" mnemonicParsing="false" onAction="#HandleLogoutButtonAction" text="Wyloguj" />
+      <Button fx:id="Users" layoutX="74.0" layoutY="66.0" mnemonicParsing="false" onAction="#HandleUsersButtonAction" prefHeight="73.0" prefWidth="107.0" text="Użytkownicy" />
+      <Button fx:id="Tasks" layoutX="219.0" layoutY="66.0" mnemonicParsing="false" onAction="#HandleTasksButtonAction" prefHeight="73.0" prefWidth="107.0" text="Zadania" />
       <Label fx:id="LogAs" layoutX="37.0" layoutY="14.0" prefHeight="17.0" prefWidth="90.0" />
    </children>
 </AnchorPane>

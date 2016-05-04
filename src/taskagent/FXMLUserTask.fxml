@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="296.0" prefWidth="388.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Controllers.FXMLUserController">
+   <children>
+      <Label layoutX="32.0" layoutY="22.0" text="Zadanie:" />
+      <Label layoutX="32.0" layoutY="63.0" text="Status:" />
+      <Label layoutX="32.0" layoutY="123.0" text="Komentarz:" />
+      <Label fx:id="task_name" layoutX="138.0" layoutY="22.0" text="Label" />
+      <ComboBox fx:id="task_status" layoutX="138.0" layoutY="59.0" prefHeight="25.0" prefWidth="216.0" />
+      <TextArea fx:id="task_comment" layoutX="138.0" layoutY="117.0" prefHeight="113.0" prefWidth="216.0" />
+      <Button layoutX="113.0" layoutY="253.0" onAction="#saveTaskChanges" mnemonicParsing="false" text="Zapisz" />
+      <Button layoutX="202.0" layoutY="253.0" onAction="#userTasks" mnemonicParsing="false" text="Wróć" />
+   </children>
+</AnchorPane>

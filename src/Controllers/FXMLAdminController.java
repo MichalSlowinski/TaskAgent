@@ -87,6 +87,14 @@ public class FXMLAdminController implements Initializable {
             WindowsOpener.open("/TaskAgent/FXMLUsers.fxml", "Tasks", true);
         }
     }
+    
+    @FXML
+    void generateRaport(ActionEvent event) {
+        int id = task_table.getSelectionModel().getSelectedItem().getId();
+        if(id >= 0) {
+            Creator c = new Creator(task_table.getSelectionModel().getSelectedItem());
+        }
+    }
 
     @FXML
     void deleteTaskButton(ActionEvent event) {
@@ -103,7 +111,7 @@ public class FXMLAdminController implements Initializable {
         task_table.setEditable(true);
         try {
             while(p.next()) {
-                data1.add(new Task(p.getInt("id"),p.getString("name"),p.getString("description"), p.getString("super_name") + " " + p.getString("super_last"), p.getString("first_2") + " " + p.getString("last_2")));
+                data1.add(new Task(p.getInt("id"),p.getString("name"),p.getString("description"), p.getString("super_name") + " " + p.getString("super_last"), p.getString("first_2") + " " + p.getString("last_2"), p.getInt("status"), p.getString("comment")));
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

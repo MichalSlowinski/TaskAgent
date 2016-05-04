@@ -12,12 +12,14 @@
          <children>
             <TableView fx:id="task_table" layoutX="14.0" layoutY="14.0" prefHeight="344.0" prefWidth="575.0">
               <columns>
-                <TableColumn fx:id="colName" prefWidth="128.0" text="Name" />
-                <TableColumn fx:id="colDesc" prefWidth="190.0" text="Desc" />
-                  <TableColumn fx:id="colSupervisor" prefWidth="256.0" text="Supervisor" />
+                <TableColumn fx:id="colName" prefWidth="128.0" text="Nazwa" />
+                <TableColumn fx:id="colDesc" prefWidth="190.0" text="Opis" />
+                  <TableColumn fx:id="colSupervisor" prefWidth="256.0" text="Kierownik" />
               </columns>
             </TableView>
-            <Button layoutX="529.0" layoutY="374.0" mnemonicParsing="false" onAction="#HandleLogoutButtonAction" text="Logout" />
+            <Button layoutX="529.0" layoutY="374.0" mnemonicParsing="false" onAction="#HandleLogoutButtonAction" text="Wyloguj" />
+            <Button layoutX="14.0" layoutY="374.0" mnemonicParsing="false" onAction="#editTask" text="Edytuj" />
+            <Button layoutX="75.0" layoutY="374.0" mnemonicParsing="false" onAction="#showTask" text="Pokaż" />
          </children>
       </AnchorPane>
    </children>

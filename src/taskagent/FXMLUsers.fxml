@@ -8,15 +8,15 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLAdminController">
    <children>
-      <Button fx:id="Back" layoutX="542.0" layoutY="361.0" mnemonicParsing="false" onAction="#HandleBackButtonAction" text="Back" />
-      <Button fx:id="AddUser" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#HandleAddUserWindow" text="Add User" />
-      <Button layoutX="86.0" layoutY="361.0" mnemonicParsing="false" onAction="#HandleEditUserWindow" text="Edit User" />
-      <Button layoutX="158.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleDeleteUser" text="Delete" />
+      <Button fx:id="Back" layoutX="542.0" layoutY="361.0" mnemonicParsing="false" onAction="#HandleBackButtonAction" text="Wróć" />
+      <Button fx:id="AddUser" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#HandleAddUserWindow" text="Dodaj" />
+      <Button layoutX="86.0" layoutY="361.0" mnemonicParsing="false" onAction="#HandleEditUserWindow" text="Edytuj" />
+      <Button layoutX="158.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleDeleteUser" text="Usuń" />
       <TableView fx:id="table_users" layoutX="14.0" layoutY="14.0" prefHeight="339.0" prefWidth="569.0">
         <columns>
-          <TableColumn fx:id="colFirstName" prefWidth="119.0" text="Firstname" />
-          <TableColumn fx:id="colLastName" prefWidth="114.0" text="Lastname" />
-            <TableColumn fx:id="colGroup" prefWidth="127.0" text="Group" />
+          <TableColumn fx:id="colFirstName" prefWidth="119.0" text="Imię" />
+          <TableColumn fx:id="colLastName" prefWidth="114.0" text="Nazwisko" />
+            <TableColumn fx:id="colGroup" prefWidth="127.0" text="Grupa" />
         </columns>
       </TableView>
    </children>
