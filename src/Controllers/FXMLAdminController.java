@@ -74,7 +74,7 @@ public class FXMLAdminController implements Initializable {
     @FXML
     void showAddTask(ActionEvent event) {
         user_state = 15;
-        WindowsOpener.open("/TaskAgent/FXMLAddTask.fxml", "Dodaj Zadanie", true);
+        WindowsOpener.open("/TaskAgent/FXMLAddTask.fxml", "Dodaj Zadanie", false);
     }
     
     @FXML
@@ -82,7 +82,7 @@ public class FXMLAdminController implements Initializable {
         int id = table_users.getSelectionModel().getSelectedItem().getId();
         if(id > 0) {
             Execute("DELETE FROM users WHERE id = "+id);
-            WindowsOpener.open("/TaskAgent/FXMLUsers.fxml", "Zadania", true);
+            WindowsOpener.open("/TaskAgent/FXMLUsers.fxml", "Zadania", false);
         }
     }
     
@@ -104,7 +104,7 @@ public class FXMLAdminController implements Initializable {
         int id = task_table.getSelectionModel().getSelectedItem().getId();
         if(id > 0) {
             Execute("DELETE FROM tasks WHERE id = "+id);
-            WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Tasks", true);
+            WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Zadania", false);
         }
     }
 
@@ -149,20 +149,20 @@ public class FXMLAdminController implements Initializable {
         if(task.getId() > 0) {
             actual_option = task.getId();
             user_state = 15;
-            WindowsOpener.open("/TaskAgent/FXMLAddTask.fxml", "Dodaj Zadanie", true);
+            WindowsOpener.open("/TaskAgent/FXMLAddTask.fxml", "Dodaj Zadanie", false);
         }
     }
 
     @FXML
     void HandleUsersButtonAction(ActionEvent event) {
         user_state = 3;
-        WindowsOpener.open("/TaskAgent/FXMLUsers.fxml", "Users", true);
+        WindowsOpener.open("/TaskAgent/FXMLUsers.fxml", "Użytkownicy", false);
     }
 
     @FXML
     void HandleTasksButtonAction(ActionEvent event) {
         user_state = 1;
-        WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Tasks", true);
+        WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Zadania", true);
     }
 
     @FXML
@@ -174,7 +174,7 @@ public class FXMLAdminController implements Initializable {
     @FXML
     void HandleAddUserWindow(ActionEvent event) {
         user_state = 9;
-        WindowsOpener.open("/TaskAgent/FXMLaddUser.fxml","Add User",true);
+        WindowsOpener.open("/TaskAgent/FXMLaddUser.fxml","Dodaj użytkownika",false);
     }
     
     @FXML
@@ -183,14 +183,14 @@ public class FXMLAdminController implements Initializable {
         if(id > 0) {
             actual_option = id;
             user_state = 10;
-            WindowsOpener.open("/TaskAgent/FXMLaddUser.fxml","Add User",true);
+            WindowsOpener.open("/TaskAgent/FXMLaddUser.fxml","Dodaj użytkownika",false);
         }
     }
 
     @FXML
     void HandleBackToUserButtonAction(ActionEvent event){
         user_state = 3;
-        WindowsOpener.open("/TaskAgent/FXMLUsers.fxml","Users",false);
+        WindowsOpener.open("/TaskAgent/FXMLUsers.fxml","Użytkownicy",false);
     }
 
     @FXML
