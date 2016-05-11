@@ -11,6 +11,7 @@ import static TaskAgent.TaskAgent.actual_option;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +22,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -29,25 +31,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class FXMLAdminController implements Initializable {
     @FXML
-    private Button AddUser;
-    @FXML
-    private ResourceBundle resources;
-    @FXML
-    private URL location;
-    @FXML
     private TextField task_name, task_desc, LastName, Login, Email, FirstName, Password;
     @FXML
     private ComboBox task_supervisior, task_user, comboGroup;
     @FXML
-    private Button Tasks;
-    @FXML
-    private Label LogAs;
-    @FXML
-    private Button Logout;
-    @FXML
-    private Button Users, task_button;
-    @FXML
-    private Button Back;
+    private Button button_add;
     @FXML
     private TableView<Task> task_table = new TableView<>();
     @FXML
@@ -58,6 +46,8 @@ public class FXMLAdminController implements Initializable {
     private ObservableList<User> data2 = FXCollections.observableArrayList();
     @FXML
     public TableColumn colName, colDesc, colSupervisor, colUser, colFirstName, colGroup, colLastName;
+    @FXML
+    private DatePicker start, end;
 
     @FXML
     void HandleLogoutButtonAction(ActionEvent event) {
@@ -68,15 +58,23 @@ public class FXMLAdminController implements Initializable {
     void addTaskButton(ActionEvent event) {
         String name = task_name.getText();
         String desc = task_desc.getText();
+        int status = 1;
         String[] supervisor = task_supervisior.getSelectionModel().getSelectedItem().toString().split(" ");
         String[] user = task_user.getSelectionModel().getSelectedItem().toString().split(" ");
+        String date_start = start.getValue().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        String date_end = end.getValue().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         if(actual_option == 0) {
-            Querys.addTask(name, desc, supervisor, user);
+            Querys.addTask(name, desc, supervisor, user, date_start, date_end, status);
         } else {
-            Querys.editTask(actual_option, name, desc, supervisor, user);
+            Querys.editTask(actual_option, name, desc, supervisor, user, date_start, date_end, status);
             actual_option = 0;
-            task_button.setText("Dodaj");
         }
+    }
+    
+    @FXML
+    void showAddTask(ActionEvent event) {
+        user_state = 15;
+        WindowsOpener.open("/TaskAgent/FXMLAddTask.fxml", "Dodaj Zadanie", true);
     }
     
     @FXML
@@ -84,7 +82,7 @@ public class FXMLAdminController implements Initializable {
         int id = table_users.getSelectionModel().getSelectedItem().getId();
         if(id > 0) {
             Execute("DELETE FROM users WHERE id = "+id);
-            WindowsOpener.open("/TaskAgent/FXMLUsers.fxml", "Tasks", true);
+            WindowsOpener.open("/TaskAgent/FXMLUsers.fxml", "Zadania", true);
         }
     }
     
@@ -94,6 +92,11 @@ public class FXMLAdminController implements Initializable {
         if(id >= 0) {
             Creator c = new Creator(task_table.getSelectionModel().getSelectedItem());
         }
+    }
+    
+    @FXML
+    private void generateMainRaport(ActionEvent event) {
+        Creator c = new Creator();
     }
 
     @FXML
@@ -145,9 +148,8 @@ public class FXMLAdminController implements Initializable {
         Task task = task_table.getSelectionModel().getSelectedItem();
         if(task.getId() > 0) {
             actual_option = task.getId();
-            task_button.setText("Edytuj");
-            task_name.setText(task.getName());
-            task_desc.setText(task.getDescription());
+            user_state = 15;
+            WindowsOpener.open("/TaskAgent/FXMLAddTask.fxml", "Dodaj Zadanie", true);
         }
     }
 
@@ -203,19 +205,6 @@ public class FXMLAdminController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         if(user_state == 1) {
             fillTaskTable();
-            ResultSet p = db.Query("SELECT * FROM users");
-            try {
-                while (p.next()) {
-                    task_supervisior.getItems().add(
-                        p.getString("firstname") + " " + p.getString("lastname")
-                    );
-                    task_user.getItems().add(
-                        p.getString("firstname") + " " + p.getString("lastname")
-                    );
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
         } else if(user_state == 3) {
             fillUserTable();
         } else if(user_state == 9) {
@@ -238,6 +227,32 @@ public class FXMLAdminController implements Initializable {
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(FXMLAdminController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if(user_state == 15) {
+            if(actual_option > 0) {
+                button_add.setText("Edytuj");
+                ResultSet task = db.Query("SELECT * FROM tasks WHERE id = " + actual_option);
+                try {
+                    if(task.next()) {
+                        task_name.setText(task.getString("name"));
+                        task_desc.setText(task.getString("description"));
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(FXMLAdminController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            ResultSet p = db.Query("SELECT * FROM users");
+            try {
+                while (p.next()) {
+                    task_supervisior.getItems().add(
+                        p.getString("firstname") + " " + p.getString("lastname")
+                    );
+                    task_user.getItems().add(
+                        p.getString("firstname") + " " + p.getString("lastname")
+                    );
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
             }
         }
     }

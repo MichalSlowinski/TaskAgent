@@ -43,10 +43,10 @@ public class FXMLLoginController {
                     open("/TaskAgent/FXMLAdmin.fxml", "Administrator", false);
                     break;
                 case 2:
-                    open("/TaskAgent/FXMLSupervisor.fxml", "Supervisor", true);
+                    open("/TaskAgent/FXMLSupervisor.fxml", "Supervisor", false);
                     break;
                 case 1:
-                    open("/TaskAgent/FXMLUser.fxml", "User", true);
+                    open("/TaskAgent/FXMLUser.fxml", "User", false);
                     break;
             }
         }

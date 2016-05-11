@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="344.0" prefWidth="374.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Controllers.FXMLAdminController">
+   <children>
+      <Label layoutX="27.0" layoutY="28.0" text="Nazwa:" />
+      <Label layoutX="27.0" layoutY="61.0" text="Opis:" />
+      <Label layoutX="27.0" layoutY="100.0" text="Kierownik:" />
+      <Label layoutX="27.0" layoutY="136.0" text="Pracownik:" />
+      <Label layoutX="27.0" layoutY="175.0" text="Data rozpoczęcia:" />
+      <Label layoutX="27.0" layoutY="215.0" text="Data zakończenia:" />
+      <Label layoutX="27.0" layoutY="251.0" text="Status:" />
+      <Button fx:id="button_add" layoutX="98.0" onAction="#addTaskButton" layoutY="304.0" mnemonicParsing="false" text="Dodaj" />
+      <Button layoutX="225.0" layoutY="304.0" onAction="#HandleTasksButtonAction" mnemonicParsing="false" text="Powrót" />
+      <TextField fx:id="task_name" layoutX="165.0" layoutY="24.0" prefHeight="25.0" prefWidth="174.0" />
+      <TextField fx:id="task_desc" layoutX="165.0" layoutY="57.0" prefHeight="25.0" prefWidth="174.0" />
+      <ComboBox fx:id="task_supervisior" layoutX="165.0" layoutY="96.0" prefHeight="25.0" prefWidth="174.0" />
+      <ComboBox fx:id="task_user" layoutX="165.0" layoutY="132.0" prefHeight="25.0" prefWidth="174.0" />
+      <ComboBox fx:id="task_status" layoutX="165.0" layoutY="247.0" prefHeight="25.0" prefWidth="174.0" />
+      <DatePicker fx:id="start" layoutX="165.0" layoutY="171.0" />
+      <DatePicker fx:id="end" layoutX="165.0" layoutY="211.0" />
+   </children>
+</AnchorPane>

@@ -20,6 +20,7 @@
             <Button layoutX="529.0" layoutY="374.0" mnemonicParsing="false" onAction="#HandleLogoutButtonAction" text="Wyloguj" />
             <Button layoutX="14.0" layoutY="374.0" mnemonicParsing="false" onAction="#editTask" text="Edytuj" />
             <Button layoutX="75.0" layoutY="374.0" mnemonicParsing="false" onAction="#showTask" text="Pokaż" />
+            <Button layoutX="135.0" layoutY="374.0" mnemonicParsing="false" onAction="#generateRaport" text="Raport" />
          </children>
       </AnchorPane>
    </children>

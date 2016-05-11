@@ -40,7 +40,7 @@ public class WindowsOpener {
             stage.setScene(new Scene(root1));  
             stage.show();
             stage.setTitle(title);
-            stage.setResizable(resize);
+            stage.setResizable(false);
             if(current != null) {
                 close_window();
             }

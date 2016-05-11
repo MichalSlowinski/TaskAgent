@@ -9,19 +9,20 @@
 
 <Pane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLSupervisorController">
    <children>
-      <AnchorPane prefHeight="417.0" prefWidth="600.0">
+      <AnchorPane layoutY="4.0" prefHeight="417.0" prefWidth="600.0">
          <children>
-            <TableView fx:id="task_table" layoutX="14.0" layoutY="14.0" prefHeight="344.0" prefWidth="575.0">
+            <TableView fx:id="task_table" layoutX="14.0" layoutY="14.0" prefHeight="364.0" prefWidth="575.0">
               <columns>
-                <TableColumn fx:id="colName" prefWidth="128.0" text="Nazwa" />
-                <TableColumn fx:id="colDesc" prefWidth="190.0" text="Opis" />
-                  <TableColumn fx:id="colSupervisor" prefWidth="256.0" text="Kierownik" />
+                <TableColumn fx:id="colName" prefWidth="195.0" text="Nazwa" />
+                <TableColumn fx:id="colDesc" prefWidth="151.0" text="Opis" />
+                  <TableColumn fx:id="colSupervisor" prefWidth="223.0" text="Pracownik" />
               </columns>
             </TableView>
-            <Button layoutX="529.0" layoutY="374.0" mnemonicParsing="false" onAction="#HandleLogoutButtonAction" text="Wyloguj" />
-            <Button layoutX="14.0" layoutY="374.0" mnemonicParsing="false" onAction="#editTask" text="Edytuj" />
-            <Button layoutX="75.0" layoutY="374.0" mnemonicParsing="false" onAction="#showTask" text="Pokaż" />
-            <Button layoutX="137.0" layoutY="374.0" mnemonicParsing="false" text="Usuń" />
+            <Button layoutX="529.0" layoutY="387.0" mnemonicParsing="false" onAction="#HandleLogoutButtonAction" text="Wyloguj" />
+            <Button layoutX="14.0" layoutY="387.0" mnemonicParsing="false" onAction="#editTask" text="Edytuj" />
+            <Button layoutX="74.0" layoutY="387.0" mnemonicParsing="false" onAction="#showTask" text="Pokaż" />
+            <Button layoutX="132.0" layoutY="387.0" mnemonicParsing="false" onAction="#deleteTask" text="Usuń" />
+            <Button layoutX="184.0" layoutY="387.0" mnemonicParsing="false" onAction="#generateRaport" text="Raport" />
          </children>
       </AnchorPane>
    </children>

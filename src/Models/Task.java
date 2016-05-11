@@ -6,6 +6,8 @@ public class Task {
     private String description;
     private String user;
     private String supervisor;
+    private String start;
+    private String end;
     private int status;
     private String comment;
 

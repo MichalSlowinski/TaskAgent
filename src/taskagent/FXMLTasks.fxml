@@ -12,15 +12,8 @@
       <AnchorPane id="AnchorPane" layoutX="5.0" layoutY="6.0" prefHeight="439.0" prefWidth="600.0">
          <children>
             <Label layoutX="279.0" layoutY="156.0" />
-            <Button fx:id="Back" layoutX="553.0" layoutY="411.0" mnemonicParsing="false" onAction="#HandleBackButtonAction" text="Wróc" />
-            <Label layoutX="50.0" layoutY="5.0" text="Nazwa" />
-            <Label layoutX="61.0" layoutY="45.0" text="Opis" />
-            <TextField fx:id="task_name" layoutX="88.0" layoutY="2.0" prefHeight="25.0" prefWidth="250.0" />
-            <TextField fx:id="task_desc" layoutX="88.0" layoutY="41.0" prefHeight="25.0" prefWidth="250.0" />
-            <Button fx:id="task_button" layoutX="520.0" layoutY="84.0" mnemonicParsing="false" onAction="#addTaskButton" prefHeight="31.0" prefWidth="66.0" text="Dodaj" />
-            <Label layoutX="34.0" layoutY="91.0" text="Kierownik" />
-            <ComboBox fx:id="task_supervisior" layoutX="88.0" layoutY="87.0" prefHeight="25.0" prefWidth="160.0" />
-            <TableView fx:id="task_table" layoutX="7.0" layoutY="125.0" prefHeight="269.0" prefWidth="586.0">
+            <Button fx:id="Back" layoutX="547.0" layoutY="411.0" mnemonicParsing="false" onAction="#HandleBackButtonAction" text="Wróc" />
+            <TableView fx:id="task_table" layoutX="7.0" layoutY="12.0" prefHeight="389.0" prefWidth="586.0">
               <columns>
                 <TableColumn fx:id="colName" prefWidth="118.0" text="Nazwa" />
                 <TableColumn fx:id="colDesc" minWidth="7.0" prefWidth="152.0" text="Opis" />
@@ -28,15 +21,11 @@
                   <TableColumn fx:id="colUser" prefWidth="162.0" text="Użytkownik" />
               </columns>
             </TableView>
-            <Label layoutX="253.0" layoutY="91.0" text="Użytkownik" />
-            <ComboBox fx:id="task_user" layoutX="316.0" layoutY="87.0" prefHeight="25.0" prefWidth="185.0" />
-            <Label layoutX="342.0" layoutY="6.0" text="Początek" />
-            <Label layoutX="354.0" layoutY="45.0" text="Koniec" />
-            <DatePicker layoutX="392.0" layoutY="2.0" prefHeight="25.0" prefWidth="199.0" />
-            <DatePicker layoutX="392.0" layoutY="41.0" prefHeight="25.0" prefWidth="199.0" />
             <Button layoutX="9.0" layoutY="411.0" mnemonicParsing="false" onAction="#editTask" text="Edycja" />
             <Button layoutX="67.0" layoutY="411.0" mnemonicParsing="false" onAction="#deleteTaskButton" text="Usuń" />
             <Button layoutX="116.0" layoutY="411.0" mnemonicParsing="false" onAction="#generateRaport" text="Raport" />
+            <Button layoutX="175.0" layoutY="411.0" mnemonicParsing="false" onAction="#generateMainRaport" text="Raport Główny" />
+            <Button layoutX="279.0" layoutY="411.0" mnemonicParsing="false" onAction="#showAddTask" text="Dodaj" />
          </children>
          <effect>
             <InnerShadow />

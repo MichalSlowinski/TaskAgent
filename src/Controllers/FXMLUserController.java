@@ -1,5 +1,6 @@
 package Controllers;
 
+import Logic.Querys;
 import Logic.WindowsOpener;
 import Models.Task;
 import static TaskAgent.TaskAgent.actual_option;
@@ -41,6 +42,14 @@ public class FXMLUserController implements Initializable {
     @FXML
     void HandleStartTaskButtonAction(ActionEvent event) {
 
+    }
+    
+    @FXML
+    void generateRaport() {
+        int id = task_table.getSelectionModel().getSelectedItem().getId();
+        if(id >= 0) {
+            Creator c = new Creator(task_table.getSelectionModel().getSelectedItem());
+        }
     }
     
     @FXML
@@ -127,10 +136,10 @@ public class FXMLUserController implements Initializable {
                     task_name.setText(task.getString("name"));
                     task_comm.setText(task.getString("comment"));
                     task_desc.setText(task.getString("description"));
-                    task_visior.setText(task.getString("id_supervisor"));
+                    task_visior.setText(Querys.getUserNameById(task.getInt("id_supervisor")));
                     task_start.setText(task.getString("date_start"));
                     task_end.setText(task.getString("date_end"));
-                    task_user.setText(task.getString("user_id"));
+                    task_user.setText(Querys.getUserNameById(task.getInt("user_id")));
                     task_stat.setText(task.getString("status"));
                 }
             } catch(Exception e) {
