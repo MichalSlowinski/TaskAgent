@@ -19,6 +19,6 @@
             <TableColumn fx:id="colGroup" prefWidth="193.0" text="Grupa" />
         </columns>
       </TableView>
-      <Button layoutX="183.0" layoutY="361.0" mnemonicParsing="false" text="Raport" />
+      <Button layoutX="183.0" layoutY="361.0" mnemonicParsing="false" onAction="#userRaport" text="Raport" />
    </children>
 </AnchorPane>

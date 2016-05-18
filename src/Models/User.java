@@ -22,7 +22,7 @@ public class User {
     }
     
     public String getGroupname() {
-        String[] groups = {"", "User", "Supervisor", "Administrator"};
+        String[] groups = {"", "Użytkownik", "Kierownik", "Administrator"};
         return groups[this.id_group];
     }
             

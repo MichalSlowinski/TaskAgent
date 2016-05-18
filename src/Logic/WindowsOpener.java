@@ -29,7 +29,7 @@ public class WindowsOpener {
     }
     
     public static void logout() {
-        open("/TaskAgent/FXMLLogin.fxml","Login", false);
+        open("/TaskAgent/FXMLLogin.fxml","Login.fxml", false);
     }
 
     public static void open(String window, String title, boolean resize) {

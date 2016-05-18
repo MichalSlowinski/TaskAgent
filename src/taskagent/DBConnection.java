@@ -16,7 +16,7 @@ public class DBConnection {
     private static String dbName = "sql7114809";
     private static String user = "sql7114809";
     private static String pass = "se4Ag7WSZ3";
-    private static String parameters = "?useSSL=false";
+    private static String parameters = "?useSSL=false&useUnicode=true&characterEncoding=UTF-8";
 
     private static PreparedStatement preparedStatement = null;
 

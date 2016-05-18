@@ -11,7 +11,11 @@ import static TaskAgent.TaskAgent.actual_option;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -56,25 +60,35 @@ public class FXMLAdminController implements Initializable {
 
     @FXML
     void addTaskButton(ActionEvent event) {
-        String name = task_name.getText();
-        String desc = task_desc.getText();
-        int status = 1;
-        String[] supervisor = task_supervisior.getSelectionModel().getSelectedItem().toString().split(" ");
-        String[] user = task_user.getSelectionModel().getSelectedItem().toString().split(" ");
-        String date_start = start.getValue().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        String date_end = end.getValue().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        if(actual_option == 0) {
-            Querys.addTask(name, desc, supervisor, user, date_start, date_end, status);
-        } else {
-            Querys.editTask(actual_option, name, desc, supervisor, user, date_start, date_end, status);
-            actual_option = 0;
+        try {
+            String name = task_name.getText();
+            String desc = task_desc.getText();
+            int status = 1;
+            String[] supervisor = task_supervisior.getSelectionModel().getSelectedItem().toString().split(" ");
+            String[] user = task_user.getSelectionModel().getSelectedItem().toString().split(" ");
+            String date_start = start.getValue().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+            String date_end = end.getValue().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+            if(start.getValue().getYear() > end.getValue().getYear() 
+                    || (start.getValue().getDayOfMonth() > end.getValue().getDayOfMonth() && start.getValue().getMonthValue() == end.getValue().getMonthValue())
+                    || start.getValue().getMonthValue() > end.getValue().getMonthValue()) {
+                WindowsOpener.alert("Błąd", "Data zakończenia musi być większa od daty startu.");
+                return;
+            }
+            if(actual_option == 0) {
+                Querys.addTask(name, desc, supervisor, user, date_start, date_end, status);
+            } else {
+                Querys.editTask(actual_option, name, desc, supervisor, user, date_start, date_end, status);
+                actual_option = 0;
+            }
+        } catch(Exception e) {
+            WindowsOpener.alert("Błąd", "Wypełnij wszystkie pola!");
         }
     }
     
     @FXML
     void showAddTask(ActionEvent event) {
         user_state = 15;
-        WindowsOpener.open("/TaskAgent/FXMLAddTask.fxml", "Dodaj Zadanie", false);
+        WindowsOpener.open("/TaskAgent/FXMLAddTask.fxml", "Dodaj Zadanie", true);
     }
     
     @FXML
@@ -82,7 +96,15 @@ public class FXMLAdminController implements Initializable {
         int id = table_users.getSelectionModel().getSelectedItem().getId();
         if(id > 0) {
             Execute("DELETE FROM users WHERE id = "+id);
-            WindowsOpener.open("/TaskAgent/FXMLUsers.fxml", "Zadania", false);
+            WindowsOpener.open("/TaskAgent/FXMLUsers.fxml", "Zadania", true);
+        }
+    }
+    
+    @FXML
+    void userRaport(ActionEvent event) {
+        int id = table_users.getSelectionModel().getSelectedItem().getId();
+        if(id >= 0) {
+            Creator c = new Creator(table_users.getSelectionModel().getSelectedItem(), true);
         }
     }
     
@@ -104,7 +126,7 @@ public class FXMLAdminController implements Initializable {
         int id = task_table.getSelectionModel().getSelectedItem().getId();
         if(id > 0) {
             Execute("DELETE FROM tasks WHERE id = "+id);
-            WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Zadania", false);
+            WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Tasks", true);
         }
     }
 
@@ -149,20 +171,20 @@ public class FXMLAdminController implements Initializable {
         if(task.getId() > 0) {
             actual_option = task.getId();
             user_state = 15;
-            WindowsOpener.open("/TaskAgent/FXMLAddTask.fxml", "Dodaj Zadanie", false);
+            WindowsOpener.open("/TaskAgent/FXMLAddTask.fxml", "Dodaj Zadanie", true);
         }
     }
 
     @FXML
     void HandleUsersButtonAction(ActionEvent event) {
         user_state = 3;
-        WindowsOpener.open("/TaskAgent/FXMLUsers.fxml", "Użytkownicy", false);
+        WindowsOpener.open("/TaskAgent/FXMLUsers.fxml", "Users", true);
     }
 
     @FXML
     void HandleTasksButtonAction(ActionEvent event) {
         user_state = 1;
-        WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Zadania", true);
+        WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Tasks", true);
     }
 
     @FXML
@@ -174,7 +196,7 @@ public class FXMLAdminController implements Initializable {
     @FXML
     void HandleAddUserWindow(ActionEvent event) {
         user_state = 9;
-        WindowsOpener.open("/TaskAgent/FXMLaddUser.fxml","Dodaj użytkownika",false);
+        WindowsOpener.open("/TaskAgent/FXMLaddUser.fxml","Add User",true);
     }
     
     @FXML
@@ -183,14 +205,14 @@ public class FXMLAdminController implements Initializable {
         if(id > 0) {
             actual_option = id;
             user_state = 10;
-            WindowsOpener.open("/TaskAgent/FXMLaddUser.fxml","Dodaj użytkownika",false);
+            WindowsOpener.open("/TaskAgent/FXMLaddUser.fxml","Add User",true);
         }
     }
 
     @FXML
     void HandleBackToUserButtonAction(ActionEvent event){
         user_state = 3;
-        WindowsOpener.open("/TaskAgent/FXMLUsers.fxml","Użytkownicy",false);
+        WindowsOpener.open("/TaskAgent/FXMLUsers.fxml","Users",false);
     }
 
     @FXML

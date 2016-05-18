@@ -2,6 +2,7 @@ package Controllers;
 
 import Logic.Querys;
 import Models.Task;
+import Models.User;
 import static TaskAgent.TaskAgent.db;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -43,6 +44,32 @@ public class Creator {
         }
     }
     
+    public Creator(User user, boolean us) {
+        Document document = new Document();
+
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream("raport.pdf"));
+            document.open();
+            Font f = new Font(FontFamily.TIMES_ROMAN, 20.0f,Font.UNDERLINE,BaseColor.BLACK);
+            Paragraph p = new Paragraph("Raport", f);
+            p.setAlignment(Element.ALIGN_CENTER);
+            document.add(p);
+            document.add(new Paragraph("\n\n"));
+            document.add(writeUser(user.getFirstname(), user.getLastname()));
+            document.add(new Paragraph("\n\n"));
+            ResultSet tasks = db.Query("SELECT * FROM tasks WHERE user_id = " + user.getId());
+            while(tasks.next()) {
+                document.add(writeTask(tasks.getString("name"), tasks.getString("description"), tasks.getInt("status"), Querys.getUserNameById(tasks.getInt("id_supervisor")), Querys.getUserNameById(tasks.getInt("user_id")), tasks.getString("comment"), tasks.getString("date_start"), tasks.getString("date_end")));
+                document.add(new Paragraph("\n\n"));
+            }
+
+            document.close();
+            Desktop.getDesktop().open(new File("raport.pdf"));
+        } catch(Exception e){
+            System.out.println("Exception: "+e);
+        }
+    }
+    
     public Creator(int supervisor) {
         Document document = new Document();
 
@@ -53,6 +80,11 @@ public class Creator {
             Paragraph p = new Paragraph("Raport", f);
             p.setAlignment(Element.ALIGN_CENTER);
             document.add(p);
+            document.add(new Paragraph("\n\n"));
+            ResultSet supvisor = db.Query("SELECT * FROM users WHERE id = " + supervisor);
+            if(supvisor.next()) {
+                document.add(writeUser(supvisor.getString("firstname"), supvisor.getString("lastname")));
+            }
             document.add(new Paragraph("\n\n"));
             ResultSet tasks = db.Query("SELECT * FROM tasks WHERE id_supervisor = " + supervisor);
             while(tasks.next()) {
@@ -65,6 +97,17 @@ public class Creator {
         } catch(Exception e){
             System.out.println("Exception: "+e);
         }
+    }
+    
+    public PdfPTable writeUser(String name, String lastname) {
+        PdfPTable table = new PdfPTable(2);
+        table.addCell(new PdfPCell(new Paragraph("Imie pracownika:")));
+        table.addCell(new PdfPCell(new Paragraph(name)));
+        table.addCell(new PdfPCell(new Paragraph("Nazwisko pracownika:")));
+        table.addCell(new PdfPCell(new Paragraph(lastname)));
+        table.addCell(new PdfPCell(new Paragraph("Grupa pracownika:")));
+        table.addCell(new PdfPCell(new Paragraph("Uzytkownik")));
+        return table;
     }
     
     public PdfPTable writeTask(String name, String desc, int status, String supervisor, String user, String comment, String start, String end) {
