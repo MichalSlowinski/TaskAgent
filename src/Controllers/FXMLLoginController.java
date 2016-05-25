@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import Singleton.WhoIm;
+import TaskAgent.TaskAgent;
 
 public class FXMLLoginController {
 
@@ -36,6 +37,7 @@ public class FXMLLoginController {
             user_id = check.getInt("id");
             user = new User(user_id, check.getString("firstname"), check.getString("lastname"), id_groups);
             user_state = 0;
+            TaskAgent.user = user;
             WhoIm.getInstance().setUser(user);
             
             switch (id_groups) {

@@ -4,6 +4,7 @@ import Logic.Querys;
 import Models.Task;
 import Models.User;
 import static TaskAgent.TaskAgent.db;
+import static TaskAgent.TaskAgent.task_state;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
@@ -44,7 +45,7 @@ public class Creator {
         }
     }
     
-    public Creator(User user, boolean us) {
+    public Creator(User user, boolean us, int sort) {
         Document document = new Document();
 
         try {
@@ -57,7 +58,13 @@ public class Creator {
             document.add(new Paragraph("\n\n"));
             document.add(writeUser(user.getFirstname(), user.getLastname()));
             document.add(new Paragraph("\n\n"));
-            ResultSet tasks = db.Query("SELECT * FROM tasks WHERE user_id = " + user.getId());
+            ResultSet tasks;
+            if(sort == 1)
+                tasks = db.Query("SELECT * FROM tasks WHERE user_id = " + user.getId() + " ORDER BY status");
+            else if(sort == 2)
+                tasks = db.Query("SELECT * FROM tasks WHERE user_id = " + user.getId() + " ORDER BY date_start");
+            else
+                tasks = db.Query("SELECT * FROM tasks WHERE user_id = " + user.getId());
             while(tasks.next()) {
                 document.add(writeTask(tasks.getString("name"), tasks.getString("description"), tasks.getInt("status"), Querys.getUserNameById(tasks.getInt("id_supervisor")), Querys.getUserNameById(tasks.getInt("user_id")), tasks.getString("comment"), tasks.getString("date_start"), tasks.getString("date_end")));
                 document.add(new Paragraph("\n\n"));
@@ -117,7 +124,7 @@ public class Creator {
         table.addCell(new PdfPCell(new Paragraph("Opis zadania:")));
         table.addCell(new PdfPCell(new Paragraph(desc)));
         table.addCell(new PdfPCell(new Paragraph("Status:")));
-        table.addCell(new PdfPCell(new Paragraph(status)));
+        table.addCell(new PdfPCell(new Paragraph(task_state[status - 1])));
         table.addCell(new PdfPCell(new Paragraph("Kierownik:")));
         table.addCell(new PdfPCell(new Paragraph(supervisor)));
         table.addCell(new PdfPCell(new Paragraph("Pracownik:")));

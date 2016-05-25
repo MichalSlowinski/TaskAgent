@@ -5,9 +5,11 @@
  */
 package Logic;
 
+import Models.User;
 import static TaskAgent.DBConnection.Execute;
 import static TaskAgent.DBConnection.Query;
 import TaskAgent.TaskAgent;
+import static TaskAgent.TaskAgent.id_groups;
 import static TaskAgent.TaskAgent.user_state;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,7 +30,11 @@ public class Querys {
                         Execute("INSERT INTO `tasks` (`name`, `description`, `id_supervisor`, `date_start`, `date_end`, `execution_time`, `status`, `user_id`, `comment`) "
                                 + "VALUES ('" + name + "', '" + desc + "', '" + m.getInt("id") + "', '"+start+"', '"+end+"', '2016-04-06 00:00:00', '"+status+"', '" + u.getInt("id") + "', '');");
                         user_state = 1;
-                        WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Tasks", true);
+                        if(id_groups == 2) {
+                            user_state = 0;
+                            WindowsOpener.open("/TaskAgent/FXMLSupervisor.fxml", "Tasks", true);
+                        } else
+                            WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Tasks", true);
                     }
                 } else {
                     WindowsOpener.alert("Błąd", "Wypełnij wszystkie dane!");
@@ -40,20 +46,27 @@ public class Querys {
     }
 
     public static void editTask(int id, String name, String desc, String[] supervisor, String[] user, String start, String end, int status) {
-        ResultSet m = Query("SELECT * FROM users WHERE firstname = '" + supervisor[0] + "' AND lastname = '" + supervisor[1] + "';");
         try {
+            ResultSet m = null, u = null;
+            m = Query("SELECT id FROM users WHERE firstname = '" + supervisor[0] + "' AND lastname = '" + supervisor[1] + "';");
             if (m.next()) {
-                ResultSet u = Query("SELECT * FROM users WHERE firstname = '" + user[0] + "' AND lastname = '" + user[1] + "';");
+                u = Query("SELECT id FROM users WHERE firstname = '" + user[0] + "' AND lastname = '" + user[1] + "';");
                 if (u.next()) {
-                    Execute("UPDATE tasks SET status = "+status+", user_id = "+u.getInt(id)+", id_supervisor = "+m.getInt(id)+", name = \"" + name + "\", description = \"" + desc + "\" WHERE id = " + id);
+                    Execute("UPDATE tasks SET status = "+status+", user_id = "+u.getInt(1)+", date_start = '"+start+"', date_end = '"+end+"', id_supervisor = "+m.getInt(1)+", name = \"" + name + "\", description = \"" + desc + "\" WHERE id = " + id);
                     user_state = 1;
-                    WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Tasks", true);
+                    if(id_groups == 2) {
+                        user_state = 0;
+                        WindowsOpener.open("/TaskAgent/FXMLSupervisor.fxml", "Tasks", true);
+                    } else
+                        WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Tasks", true);
+                } else {
+                    WindowsOpener.alert("Błąd", "Wypełnij wszystkie dane!");
                 }
             } else {
                 WindowsOpener.alert("Błąd", "Wypełnij wszystkie dane!");
             }
         } catch (SQLException ex) {
-
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -86,5 +99,14 @@ public class Querys {
             name = user.getString("firstname") + " " + user.getString("lastname");
         }
         return name;
+    }
+    
+    public static User getUserById(int id) throws SQLException {
+        User u = null;
+        ResultSet p = Query("SELECT * FROM users WHERE id = " + id);
+        if(p.next()) {
+            u = new User(p.getInt("id"), p.getString("firstname"), p.getString("lastname"), p.getInt("id_groups"));
+        }        
+        return u;
     }
 }

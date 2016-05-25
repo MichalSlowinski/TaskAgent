@@ -19,10 +19,11 @@
               </columns>
             </TableView>
             <Button layoutX="529.0" layoutY="387.0" mnemonicParsing="false" onAction="#HandleLogoutButtonAction" text="Wyloguj" />
-            <Button layoutX="14.0" layoutY="387.0" mnemonicParsing="false" onAction="#editTask" text="Edytuj" />
-            <Button layoutX="74.0" layoutY="387.0" mnemonicParsing="false" onAction="#showTask" text="Pokaż" />
-            <Button layoutX="132.0" layoutY="387.0" mnemonicParsing="false" onAction="#deleteTask" text="Usuń" />
-            <Button layoutX="184.0" layoutY="387.0" mnemonicParsing="false" onAction="#generateRaport" text="Raport" />
+            <Button layoutX="72.0" layoutY="387.0" mnemonicParsing="false" onAction="#editTask" text="Edytuj" />
+            <Button layoutX="131.0" layoutY="387.0" mnemonicParsing="false" onAction="#showTask" text="Pokaż" />
+            <Button layoutX="194.0" layoutY="387.0" mnemonicParsing="false" onAction="#deleteTask" text="Usuń" />
+            <Button layoutX="248.0" layoutY="387.0" mnemonicParsing="false" onAction="#generateRaport" text="Raport" />
+            <Button layoutX="14.0" layoutY="387.0" mnemonicParsing="false" onAction="#addTaskWindow" text="Dodaj" />
          </children>
       </AnchorPane>
    </children>

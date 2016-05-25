@@ -8,11 +8,14 @@ import static TaskAgent.DBConnection.Execute;
 import static TaskAgent.TaskAgent.db;
 import static TaskAgent.TaskAgent.user_state;
 import static TaskAgent.TaskAgent.actual_option;
+import static TaskAgent.TaskAgent.task_state;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
@@ -27,7 +30,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -37,7 +39,7 @@ public class FXMLAdminController implements Initializable {
     @FXML
     private TextField task_name, task_desc, LastName, Login, Email, FirstName, Password;
     @FXML
-    private ComboBox task_supervisior, task_user, comboGroup;
+    private ComboBox task_supervisior, task_user, comboGroup, task_status;
     @FXML
     private Button button_add;
     @FXML
@@ -68,17 +70,25 @@ public class FXMLAdminController implements Initializable {
             String[] user = task_user.getSelectionModel().getSelectedItem().toString().split(" ");
             String date_start = start.getValue().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
             String date_end = end.getValue().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+            Calendar c = Calendar.getInstance();
             if(start.getValue().getYear() > end.getValue().getYear() 
-                    || (start.getValue().getDayOfMonth() > end.getValue().getDayOfMonth() && start.getValue().getMonthValue() == end.getValue().getMonthValue())
+                    || ((start.getValue().getDayOfMonth() > end.getValue().getDayOfMonth() && start.getValue().getMonthValue() == end.getValue().getMonthValue()))
                     || start.getValue().getMonthValue() > end.getValue().getMonthValue()) {
                 WindowsOpener.alert("Błąd", "Data zakończenia musi być większa od daty startu.");
                 return;
             }
+            /*
+            if(c.get(Calendar.YEAR) < start.getValue().getYear() 
+                    || c.get(Calendar.MONTH) < start.getValue().getMonthValue() 
+                    || (c.get(Calendar.MONTH) == start.getValue().getMonthValue() && c.get(Calendar.DAY_OF_MONTH) <= start.getValue().getDayOfMonth())) {
+                WindowsOpener.alert("Błąd", "Data rozpoczęcia musi być wieksza lub równa dzisiejszej dacie!");
+                return;
+            }
+            */
             if(actual_option == 0) {
                 Querys.addTask(name, desc, supervisor, user, date_start, date_end, status);
             } else {
                 Querys.editTask(actual_option, name, desc, supervisor, user, date_start, date_end, status);
-                actual_option = 0;
             }
         } catch(Exception e) {
             WindowsOpener.alert("Błąd", "Wypełnij wszystkie pola!");
@@ -102,9 +112,11 @@ public class FXMLAdminController implements Initializable {
     
     @FXML
     void userRaport(ActionEvent event) {
-        int id = table_users.getSelectionModel().getSelectedItem().getId();
-        if(id >= 0) {
-            Creator c = new Creator(table_users.getSelectionModel().getSelectedItem(), true);
+        if(table_users.getSelectionModel().getSelectedIndex() >= 0) {
+            int id = table_users.getSelectionModel().getSelectedItem().getId();
+            actual_option = id;
+            user_state = 21;
+            WindowsOpener.open("/TaskAgent/FXMLRaport.fxml", "Zadania", true);
         }
     }
     
@@ -171,7 +183,7 @@ public class FXMLAdminController implements Initializable {
         if(task.getId() > 0) {
             actual_option = task.getId();
             user_state = 15;
-            WindowsOpener.open("/TaskAgent/FXMLAddTask.fxml", "Dodaj Zadanie", true);
+            WindowsOpener.open("/TaskAgent/FXMLAddTask.fxml", "Edytuj Zadanie", true);
         }
     }
 
@@ -258,8 +270,17 @@ public class FXMLAdminController implements Initializable {
                     if(task.next()) {
                         task_name.setText(task.getString("name"));
                         task_desc.setText(task.getString("description"));
+                        task_status.getSelectionModel().select(task.getInt("status") - 1);
+                        Date date = new SimpleDateFormat("dd.MM.yyyy").parse(task.getString("date_start"));
+                        LocalDate local = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                        start.setValue(local);
+                        date = new SimpleDateFormat("dd.MM.yyyy").parse(task.getString("date_end"));
+                        local = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                        end.setValue(local);
                     }
                 } catch (SQLException ex) {
+                    Logger.getLogger(FXMLAdminController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
                     Logger.getLogger(FXMLAdminController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -273,6 +294,10 @@ public class FXMLAdminController implements Initializable {
                         p.getString("firstname") + " " + p.getString("lastname")
                     );
                 }
+                task_status.getItems().addAll(task_state);
+                task_supervisior.getSelectionModel().select(0);
+                task_user.getSelectionModel().select(0);
+                task_status.getSelectionModel().select(0);
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
