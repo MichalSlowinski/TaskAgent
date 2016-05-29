@@ -122,7 +122,7 @@ public class FXMLSupervisorController implements Initializable {
         int index = task_table.getSelectionModel().getSelectedIndex();
         if(index >= 0) {
             db.Execute("DELETE FROM tasks WHERE id = " + task_table.getSelectionModel().getSelectedItem().getId());
-            open("/TaskAgent/FXMLSupervisor.fxml", "Supervisor", false);
+            open("/TaskAgent/FXMLSupervisor.fxml", "Kierownik", false);
         }
     }
     
