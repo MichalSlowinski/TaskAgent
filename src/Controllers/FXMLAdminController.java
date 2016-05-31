@@ -77,14 +77,12 @@ public class FXMLAdminController implements Initializable {
                 WindowsOpener.alert("Błąd", "Data zakończenia musi być większa od daty startu.");
                 return;
             }
-            /*
             if(c.get(Calendar.YEAR) < start.getValue().getYear() 
                     || c.get(Calendar.MONTH) < start.getValue().getMonthValue() 
                     || (c.get(Calendar.MONTH) == start.getValue().getMonthValue() && c.get(Calendar.DAY_OF_MONTH) <= start.getValue().getDayOfMonth())) {
                 WindowsOpener.alert("Błąd", "Data rozpoczęcia musi być wieksza lub równa dzisiejszej dacie!");
                 return;
             }
-            */
             if(actual_option == 0) {
                 Querys.addTask(name, desc, supervisor, user, date_start, date_end, status);
             } else {
@@ -130,7 +128,9 @@ public class FXMLAdminController implements Initializable {
     
     @FXML
     private void generateMainRaport(ActionEvent event) {
-        Creator c = new Creator();
+        actual_option = -1;
+        user_state = 25;
+        WindowsOpener.open("/TaskAgent/FXMLRaport.fxml", "Zadania", true);
     }
 
     @FXML
@@ -138,12 +138,12 @@ public class FXMLAdminController implements Initializable {
         int id = task_table.getSelectionModel().getSelectedItem().getId();
         if(id > 0) {
             Execute("DELETE FROM tasks WHERE id = "+id);
-            WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Tasks", true);
+            WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Zadania", true);
         }
     }
 
     void fillTaskTable() {
-        ResultSet p = db.Query("SELECT t.*, u.firstname AS super_name, u.lastname AS super_last, u2.firstname AS first_2, u2.lastname AS last_2 FROM tasks t JOIN users u ON u.id = t.id_supervisor LEFT JOIN users u2 ON u2.id = t.user_id");
+        ResultSet p = db.Query("SELECT t.*, u.firstname AS super_name, u.lastname AS super_last, u2.firstname AS first_2, u2.lastname AS last_2 FROM tasks t LEFT JOIN users u ON u.id = t.id_supervisor LEFT JOIN users u2 ON u2.id = t.user_id");
         data1.clear();
         task_table.setEditable(true);
         try {
@@ -190,13 +190,13 @@ public class FXMLAdminController implements Initializable {
     @FXML
     void HandleUsersButtonAction(ActionEvent event) {
         user_state = 3;
-        WindowsOpener.open("/TaskAgent/FXMLUsers.fxml", "Users", true);
+        WindowsOpener.open("/TaskAgent/FXMLUsers.fxml", "Użytkownicy", true);
     }
 
     @FXML
     void HandleTasksButtonAction(ActionEvent event) {
         user_state = 1;
-        WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Tasks", true);
+        WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Zadania", true);
     }
 
     @FXML
@@ -208,7 +208,7 @@ public class FXMLAdminController implements Initializable {
     @FXML
     void HandleAddUserWindow(ActionEvent event) {
         user_state = 9;
-        WindowsOpener.open("/TaskAgent/FXMLaddUser.fxml","Add User",true);
+        WindowsOpener.open("/TaskAgent/FXMLaddUser.fxml","Dodaj Użytkownika",true);
     }
     
     @FXML
@@ -217,14 +217,14 @@ public class FXMLAdminController implements Initializable {
         if(id > 0) {
             actual_option = id;
             user_state = 10;
-            WindowsOpener.open("/TaskAgent/FXMLaddUser.fxml","Add User",true);
+            WindowsOpener.open("/TaskAgent/FXMLaddUser.fxml","Edytuj Użytkownika",true);
         }
     }
 
     @FXML
     void HandleBackToUserButtonAction(ActionEvent event){
         user_state = 3;
-        WindowsOpener.open("/TaskAgent/FXMLUsers.fxml","Users",false);
+        WindowsOpener.open("/TaskAgent/FXMLUsers.fxml","Użytkownicy",false);
     }
 
     @FXML
@@ -243,11 +243,11 @@ public class FXMLAdminController implements Initializable {
             fillUserTable();
         } else if(user_state == 9) {
             comboGroup.getItems().addAll(
-                "User", "Supervisor", "Administrator"
+                "Użytkownik", "Kierownik", "Administrator"
             );
         } else if(user_state == 10) {
             comboGroup.getItems().addAll(
-                "User", "Supervisor", "Administrator"
+                "Użytkownik", "Kierownik", "Administrator"
             );
             ResultSet user = db.Query("SELECT * FROM users WHERE id = "+actual_option);
             try {

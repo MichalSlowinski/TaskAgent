@@ -1,5 +1,6 @@
 package Controllers;
 
+import Logic.WindowsOpener;
 import static Logic.WindowsOpener.*;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,6 +38,7 @@ public class FXMLLoginController {
             user_id = check.getInt("id");
             user = new User(user_id, check.getString("firstname"), check.getString("lastname"), id_groups);
             user_state = 0;
+            actual_option = 0;
             TaskAgent.user = user;
             WhoIm.getInstance().setUser(user);
             
@@ -45,12 +47,14 @@ public class FXMLLoginController {
                     open("/TaskAgent/FXMLAdmin.fxml", "Administrator", false);
                     break;
                 case 2:
-                    open("/TaskAgent/FXMLSupervisor.fxml", "Supervisor", false);
+                    open("/TaskAgent/FXMLSupervisor.fxml", "Kierownik", false);
                     break;
                 case 1:
-                    open("/TaskAgent/FXMLUser.fxml", "User", false);
+                    open("/TaskAgent/FXMLUser.fxml", "Użytkownik", false);
                     break;
             }
+        } else {
+            WindowsOpener.alert("Błąd", "Podano niepoprawne dane!");
         }
     }
 

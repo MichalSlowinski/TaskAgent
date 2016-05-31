@@ -87,14 +87,12 @@ public class FXMLSupervisorController implements Initializable {
                 WindowsOpener.alert("Błąd", "Data zakończenia musi być większa od daty startu.");
                 return;
             }
-            /*
             if(c.get(Calendar.YEAR) < start.getValue().getYear() 
                     || c.get(Calendar.MONTH) < start.getValue().getMonthValue() 
                     || (c.get(Calendar.MONTH) == start.getValue().getMonthValue() && c.get(Calendar.DAY_OF_MONTH) <= start.getValue().getDayOfMonth())) {
                 WindowsOpener.alert("Błąd", "Data rozpoczęcia musi być wieksza lub równa dzisiejszej dacie!");
                 return;
             }
-            */
             if(actual_option == 0) {
                 Querys.addTask(name, desc, supervisor, user, date_start, date_end, status);
             } else {
@@ -168,7 +166,7 @@ public class FXMLSupervisorController implements Initializable {
                 if(task.next()) {
                     task_name.setText(task.getString("name"));
                     task_desc.setText(task.getString("description"));
-                    task_stat.setText(task.getString("status"));
+                    task_stat.setText(TaskAgent.task_state[task.getInt("status") - 1]);
                     task_visior.setText(Querys.getUserNameById(task.getInt("id_supervisor")));
                     task_user.setText(Querys.getUserNameById(task.getInt("user_id")));
                     task_comm.setText(task.getString("comment"));

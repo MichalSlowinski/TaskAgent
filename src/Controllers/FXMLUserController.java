@@ -6,6 +6,7 @@ import Models.Task;
 import static TaskAgent.TaskAgent.actual_option;
 import static TaskAgent.TaskAgent.user_state;
 import static TaskAgent.TaskAgent.db;
+import static TaskAgent.TaskAgent.task_state;
 import static TaskAgent.TaskAgent.user_id;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -50,6 +51,11 @@ public class FXMLUserController implements Initializable {
         if(id >= 0) {
             Creator c = new Creator(task_table.getSelectionModel().getSelectedItem());
         }
+    }
+    
+    @FXML
+    void mainRaport(ActionEvent Event) {
+        WindowsOpener.open("/TaskAgent/FXMLRaport.fxml", "Raport", true);
     }
     
     @FXML
@@ -140,7 +146,7 @@ public class FXMLUserController implements Initializable {
                     task_start.setText(task.getString("date_start"));
                     task_end.setText(task.getString("date_end"));
                     task_user.setText(Querys.getUserNameById(task.getInt("user_id")));
-                    task_stat.setText(task.getString("status"));
+                    task_stat.setText(task_state[task.getInt("status") - 1]);
                 }
             } catch(Exception e) {
                 
