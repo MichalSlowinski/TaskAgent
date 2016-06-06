@@ -6,25 +6,24 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="422.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Controllers.FXMLUserController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="422.0" style="-fx-background-color: D9D9F3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLUserController">
    <children>
-      <Label layoutX="29.0" layoutY="25.0" text="Nazwa:" />
-      <Label layoutX="29.0" layoutY="60.0" text="Opis:" />
-      <Label layoutX="29.0" layoutY="100.0" text="Kierownik:" />
-      <Label layoutX="29.0" layoutY="138.0" text="Data rozpoczęcia:" />
-      <Label layoutX="29.0" layoutY="176.0" text="Data zakończenia:" />
-      <Label layoutX="29.0" layoutY="211.0" text="Status:" />
-      <Label layoutX="29.0" layoutY="246.0" text="Pracownik:" />
-      <Label layoutX="29.0" layoutY="285.0" text="Komentarz:" />
-      <Button layoutX="174.0" layoutY="342.0" onAction="#userTasks" mnemonicParsing="false" text="Powrót" />
-      <Label fx:id="task_name" layoutX="160.0" layoutY="25.0" text="Label" />
-      <Label fx:id="task_desc" layoutX="160.0" layoutY="60.0" text="Label" />
-      <Label fx:id="task_visior" layoutX="160.0" layoutY="100.0" text="Label" />
-      <Label fx:id="task_start" layoutX="160.0" layoutY="138.0" text="Label" />
-      <Label fx:id="task_end" layoutX="160.0" layoutY="176.0" text="Label" />
-      <Label fx:id="task_stat" layoutX="160.0" layoutY="211.0" text="Label" />
-      <Label fx:id="task_user" layoutX="160.0" layoutY="246.0" text="Label" />
-      <Label fx:id="task_comm" layoutX="160.0" layoutY="285.0" text="Label" />
+      <Label layoutX="29.0" layoutY="25.0" style="-fx-font-family: Cambria; -fx-font-size: 16;" text="Nazwa:" />
+      <Label layoutX="29.0" layoutY="60.0" style="-fx-font-family: Cambria; -fx-font-size: 16;" text="Opis:" />
+      <Label layoutX="29.0" layoutY="100.0" style="-fx-font-family: Cambria; -fx-font-size: 16;" text="Kierownik:" />
+      <Label layoutX="29.0" layoutY="138.0" style="-fx-font-family: Cambria; -fx-font-size: 16;" text="Data rozpoczęcia:" />
+      <Label layoutX="29.0" layoutY="176.0" style="-fx-font-family: Cambria; -fx-font-size: 16;" text="Data zakończenia:" />
+      <Label layoutX="29.0" layoutY="211.0" style="-fx-font-family: Cambria; -fx-font-size: 16;" text="Status:" />
+      <Label layoutX="29.0" layoutY="246.0" style="-fx-font-family: Cambria; -fx-font-size: 16;" text="Pracownik:" />
+      <Label layoutX="29.0" layoutY="285.0" style="-fx-font-family: Cambria; -fx-font-size: 16;" text="Komentarz:" />
+      <Button layoutX="174.0" layoutY="342.0" mnemonicParsing="false" onAction="#userTasks" style="-fx-background-color: #c6c6ed; -fx-font-family: Cambria;" text="Powrót" />
+      <Label fx:id="task_name" layoutX="160.0" layoutY="25.0" style="-fx-font-family: Cambria; -fx-font-size: 16;" text="Label" />
+      <Label fx:id="task_desc" layoutX="160.0" layoutY="60.0" style="-fx-font-family: Cambria; -fx-font-size: 16;" text="Label" />
+      <Label fx:id="task_visior" layoutX="160.0" layoutY="100.0" style="-fx-font-family: Cambria; -fx-font-size: 16;" text="Label" />
+      <Label fx:id="task_start" layoutX="160.0" layoutY="138.0" style="-fx-font-family: Cambria; -fx-font-size: 16;" text="Label" />
+      <Label fx:id="task_end" layoutX="160.0" layoutY="176.0" style="-fx-font-family: Cambria; -fx-font-size: 16;" text="Label" />
+      <Label fx:id="task_stat" layoutX="160.0" layoutY="211.0" style="-fx-font-family: Cambria; -fx-font-size: 16;" text="Label" />
+      <Label fx:id="task_user" layoutX="160.0" layoutY="246.0" style="-fx-font-family: Cambria; -fx-font-size: 16;" text="Label" />
+      <Label fx:id="task_comm" layoutX="160.0" layoutY="285.0" style="-fx-font-family: Cambria; -fx-font-size: 16;" text="Label" />
    </children>
 </AnchorPane>

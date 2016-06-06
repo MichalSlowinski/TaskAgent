@@ -9,21 +9,21 @@
 
 <Pane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLSupervisorController">
    <children>
-      <AnchorPane layoutY="4.0" prefHeight="417.0" prefWidth="600.0">
+      <AnchorPane prefHeight="428.0" prefWidth="605.0" style="-fx-background-color: #D9D9F3;">
          <children>
-            <TableView fx:id="task_table" layoutX="14.0" layoutY="14.0" prefHeight="364.0" prefWidth="575.0">
+            <TableView fx:id="task_table" layoutX="13.0" layoutY="14.0" prefHeight="364.0" prefWidth="575.0" style="-fx-font-family: Cambria;">
               <columns>
                 <TableColumn fx:id="colName" prefWidth="195.0" text="Nazwa" />
                 <TableColumn fx:id="colDesc" prefWidth="151.0" text="Opis" />
                   <TableColumn fx:id="colSupervisor" prefWidth="223.0" text="Pracownik" />
               </columns>
             </TableView>
-            <Button layoutX="529.0" layoutY="387.0" mnemonicParsing="false" onAction="#HandleLogoutButtonAction" text="Wyloguj" />
-            <Button layoutX="72.0" layoutY="387.0" mnemonicParsing="false" onAction="#editTask" text="Edytuj" />
-            <Button layoutX="131.0" layoutY="387.0" mnemonicParsing="false" onAction="#showTask" text="Pokaż" />
-            <Button layoutX="194.0" layoutY="387.0" mnemonicParsing="false" onAction="#deleteTask" text="Usuń" />
-            <Button layoutX="248.0" layoutY="387.0" mnemonicParsing="false" onAction="#generateRaport" text="Raport" />
-            <Button layoutX="14.0" layoutY="387.0" mnemonicParsing="false" onAction="#addTaskWindow" text="Dodaj" />
+            <Button layoutX="529.0" layoutY="387.0" mnemonicParsing="false" onAction="#HandleLogoutButtonAction" style="-fx-background-color: #c6c6ed; -fx-font-family: cambria;" text="Wyloguj" />
+            <Button layoutX="72.0" layoutY="387.0" mnemonicParsing="false" onAction="#editTask" style="-fx-background-color: #c6c6ed; -fx-font-family: cambria;" text="Edytuj" />
+            <Button layoutX="131.0" layoutY="387.0" mnemonicParsing="false" onAction="#showTask" style="-fx-background-color: #c6c6ed; -fx-font-family: cambria;" text="Pokaż" />
+            <Button layoutX="194.0" layoutY="387.0" mnemonicParsing="false" onAction="#deleteTask" style="-fx-background-color: #c6c6ed; -fx-font-family: cambria;" text="Usuń" />
+            <Button layoutX="248.0" layoutY="387.0" mnemonicParsing="false" onAction="#generateRaport" style="-fx-background-color: #c6c6ed; -fx-font-family: cambria;" text="Raport" />
+            <Button layoutX="14.0" layoutY="387.0" mnemonicParsing="false" onAction="#addTaskWindow" style="-fx-background-color: #c6c6ed; -fx-font-family: cambria;" text="Dodaj" />
          </children>
       </AnchorPane>
    </children>

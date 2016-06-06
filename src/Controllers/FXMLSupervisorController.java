@@ -145,7 +145,7 @@ public class FXMLSupervisorController implements Initializable {
         task_table.setEditable(true);
         try {
             while(p.next()) {
-                data1.add(new Task(p.getInt("id"),p.getString("name"),p.getString("description"), p.getString("super_name") + " " + p.getString("super_last"), p.getString("first_2") + " " + p.getString("last_2"), p.getInt("status"), p.getString("comment")));
+                data1.add(new Task(p.getInt("id"),p.getString("name"),p.getString("description"), p.getString("super_name") + " " + p.getString("super_last"), p.getString("first_2") + " " + p.getString("last_2"), p.getInt("status"), p.getString("comment"), p.getString("date_start"), p.getString("date_end")));
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

@@ -7,11 +7,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="205.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLAdminController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="205.0" prefWidth="405.0" style="-fx-background-color: D9D9F3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLAdminController">
    <children>
-      <Button fx:id="Logout" layoutX="337.0" layoutY="166.0" mnemonicParsing="false" onAction="#HandleLogoutButtonAction" text="Wyloguj" />
-      <Button fx:id="Users" layoutX="74.0" layoutY="66.0" mnemonicParsing="false" onAction="#HandleUsersButtonAction" prefHeight="73.0" prefWidth="107.0" text="Użytkownicy" />
-      <Button fx:id="Tasks" layoutX="219.0" layoutY="66.0" mnemonicParsing="false" onAction="#HandleTasksButtonAction" prefHeight="73.0" prefWidth="107.0" text="Zadania" />
+      <Button fx:id="Logout" layoutX="337.0" layoutY="166.0" mnemonicParsing="false" onAction="#HandleLogoutButtonAction" style="-fx-background-color: #c6c6ed; -fx-font-family: cambria;" text="Wyloguj" />
+      <Button fx:id="Users" layoutX="74.0" layoutY="66.0" mnemonicParsing="false" onAction="#HandleUsersButtonAction" prefHeight="73.0" prefWidth="107.0" style="-fx-background-color: #c6c6ed; -fx-font-family: cambria; -fx-font-size: 14;" text="Użytkownicy" />
+      <Button fx:id="Tasks" layoutX="219.0" layoutY="66.0" mnemonicParsing="false" onAction="#HandleTasksButtonAction" prefHeight="73.0" prefWidth="107.0" style="-fx-background-color: #c6c6ed; -fx-font-family: cambria; -fx-font-size: 14;" text="Zadania" />
       <Label fx:id="LogAs" layoutX="37.0" layoutY="14.0" prefHeight="17.0" prefWidth="90.0" />
    </children>
 </AnchorPane>

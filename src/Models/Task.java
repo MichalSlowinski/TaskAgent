@@ -1,5 +1,7 @@
 package Models;
 
+import TaskAgent.TaskAgent;
+
 public class Task {
     private int id;
     private String name;
@@ -11,7 +13,7 @@ public class Task {
     private int status;
     private String comment;
 
-    public Task(int id, String name, String desc, String supervisor, String user, int status, String comm) {
+    public Task(int id, String name, String desc, String supervisor, String user, int status, String comm, String start, String end) {
         this.id = id;
         this.name = name;
         this.description = desc;
@@ -19,6 +21,8 @@ public class Task {
         this.user = user;
         this.status = status;
         this.comment = comm;
+        this.end = end;
+        this.start = start;
     }
     
     public int getId() {
@@ -26,11 +30,11 @@ public class Task {
     }
     
     public String getStart() {
-        return "01.01.2016";
+        return this.start;
     }
     
     public String getEnd() {
-        return "01.01.2017";
+        return this.end;
     }
 
     public String getComment() {
@@ -39,6 +43,10 @@ public class Task {
     
     public int getStatus() {
         return this.status;
+    }
+    
+    public String getStatusname() {
+        return TaskAgent.task_state[this.status - 1];
     }
     
     public String getSupervisor() {

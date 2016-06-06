@@ -51,7 +51,7 @@ public class FXMLAdminController implements Initializable {
     @FXML
     private ObservableList<User> data2 = FXCollections.observableArrayList();
     @FXML
-    public TableColumn colName, colDesc, colSupervisor, colUser, colFirstName, colGroup, colLastName;
+    public TableColumn colName, colDesc, colSupervisor, colUser, colFirstName, colGroup, colLastName, colTaskStatus, colTaskStart, colTaskEnd;
     @FXML
     private DatePicker start, end;
 
@@ -148,7 +148,7 @@ public class FXMLAdminController implements Initializable {
         task_table.setEditable(true);
         try {
             while(p.next()) {
-                data1.add(new Task(p.getInt("id"),p.getString("name"),p.getString("description"), p.getString("super_name") + " " + p.getString("super_last"), p.getString("first_2") + " " + p.getString("last_2"), p.getInt("status"), p.getString("comment")));
+                data1.add(new Task(p.getInt("id"),p.getString("name"),p.getString("description"), p.getString("super_name") + " " + p.getString("super_last"), p.getString("first_2") + " " + p.getString("last_2"), p.getInt("status"), p.getString("comment"), p.getString("date_start"), p.getString("date_end")));
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -157,6 +157,9 @@ public class FXMLAdminController implements Initializable {
         colDesc.setCellValueFactory(new PropertyValueFactory<>("description"));
         colSupervisor.setCellValueFactory(new PropertyValueFactory<>("supervisor"));
         colUser.setCellValueFactory(new PropertyValueFactory<>("user"));
+        colTaskStatus.setCellValueFactory(new PropertyValueFactory<>("statusname"));
+        colTaskStart.setCellValueFactory(new PropertyValueFactory<>("start"));
+        colTaskEnd.setCellValueFactory(new PropertyValueFactory<>("end"));
         task_table.setItems(data1);
     }
     

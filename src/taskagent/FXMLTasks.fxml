@@ -7,25 +7,28 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane prefHeight="450.0" prefWidth="609.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLAdminController">
+<Pane prefHeight="466.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLAdminController">
    <children>
-      <AnchorPane id="AnchorPane" layoutX="5.0" layoutY="6.0" prefHeight="439.0" prefWidth="600.0">
+      <AnchorPane id="AnchorPane" layoutX="-11.0" layoutY="-10.0" prefHeight="482.0" prefWidth="808.0" style="-fx-background-color: #D9D9F3;">
          <children>
             <Label layoutX="279.0" layoutY="156.0" />
-            <Button fx:id="Back" layoutX="547.0" layoutY="411.0" mnemonicParsing="false" onAction="#HandleBackButtonAction" text="Wróc" />
-            <TableView fx:id="task_table" layoutX="7.0" layoutY="12.0" prefHeight="389.0" prefWidth="586.0">
+            <Button fx:id="Back" layoutX="715.0" layoutY="411.0" mnemonicParsing="false" onAction="#HandleBackButtonAction" style="-fx-background-color: #c6c6ed; -fx-font-family: cambria;" text="Wróć" />
+            <TableView fx:id="task_table" layoutX="14.0" layoutY="14.0" prefHeight="389.0" prefWidth="782.0" style="-fx-font-family: Cambria;">
               <columns>
                 <TableColumn fx:id="colName" prefWidth="118.0" text="Nazwa" />
-                <TableColumn fx:id="colDesc" minWidth="7.0" prefWidth="152.0" text="Opis" />
-                  <TableColumn fx:id="colSupervisor" prefWidth="148.0" text="Kierownik" />
-                  <TableColumn fx:id="colUser" prefWidth="162.0" text="Użytkownik" />
+                <TableColumn fx:id="colDesc" minWidth="7.0" prefWidth="135.0" text="Opis" />
+                  <TableColumn fx:id="colSupervisor" prefWidth="131.0" text="Kierownik" />
+                  <TableColumn fx:id="colUser" prefWidth="120.0" text="Użytkownik" />
+                  <TableColumn fx:id="colTaskStart" prefWidth="75.0" text="Rozpoczecie" />
+                  <TableColumn fx:id="colTaskEnd" prefWidth="91.0" text="Zakończenie" />
+                  <TableColumn fx:id="colTaskStatus" prefWidth="77.0" text="Status" />
               </columns>
             </TableView>
-            <Button layoutX="9.0" layoutY="411.0" mnemonicParsing="false" onAction="#editTask" text="Edycja" />
-            <Button layoutX="67.0" layoutY="411.0" mnemonicParsing="false" onAction="#deleteTaskButton" text="Usuń" />
-            <Button layoutX="116.0" layoutY="411.0" mnemonicParsing="false" onAction="#generateRaport" text="Raport" />
-            <Button layoutX="175.0" layoutY="411.0" mnemonicParsing="false" onAction="#generateMainRaport" text="Raport Główny" />
-            <Button layoutX="279.0" layoutY="411.0" mnemonicParsing="false" onAction="#showAddTask" text="Dodaj" />
+            <Button layoutX="9.0" layoutY="411.0" mnemonicParsing="false" onAction="#editTask" style="-fx-background-color: #c6c6ed; -fx-font-family: cambria;" text="Edycja" />
+            <Button layoutX="67.0" layoutY="411.0" mnemonicParsing="false" onAction="#deleteTaskButton" style="-fx-background-color: #c6c6ed; -fx-font-family: cambria;" text="Usuń" />
+            <Button layoutX="116.0" layoutY="411.0" mnemonicParsing="false" onAction="#generateRaport" style="-fx-background-color: #c6c6ed; -fx-font-family: cambria;" text="Raport" />
+            <Button layoutX="175.0" layoutY="411.0" mnemonicParsing="false" onAction="#generateMainRaport" style="-fx-background-color: #c6c6ed; -fx-font-family: cambria;" text="Raport Główny" />
+            <Button layoutX="279.0" layoutY="411.0" mnemonicParsing="false" onAction="#showAddTask" style="-fx-background-color: #c6c6ed; -fx-font-family: cambria;" text="Dodaj" />
          </children>
          <effect>
             <InnerShadow />
