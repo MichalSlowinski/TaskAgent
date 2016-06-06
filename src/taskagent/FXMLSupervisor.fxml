@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLSupervisorController">
+<Pane prefHeight="428.0" prefWidth="605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLSupervisorController" style="-fx-background-color: #D9D9F3;">
    <children>
       <AnchorPane prefHeight="428.0" prefWidth="605.0" style="-fx-background-color: #D9D9F3;">
          <children>
