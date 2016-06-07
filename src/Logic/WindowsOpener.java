@@ -48,5 +48,5 @@ public class WindowsOpener {
          } catch(Exception e) {
              alert("Error","Nie można otwożyć okna " + e.getMessage());
          }
-    }
+    }//our window opening class
 }

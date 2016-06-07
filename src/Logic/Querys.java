@@ -100,4 +100,5 @@ public class Querys {
         }        
         return u;
     }
+    //almost all querys
 }
