@@ -33,5 +33,5 @@ public class User {
     public int getId() {
         return this.user_id;
     }
-    //just user model
+    //model obiektu użytkownika
 }

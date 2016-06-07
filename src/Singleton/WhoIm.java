@@ -30,5 +30,5 @@ public class WhoIm {
         this.user = user;
     }
 
-  //just Singleton  
+  //Prosty Singleton do przechowywania danych użytkownika  
 }

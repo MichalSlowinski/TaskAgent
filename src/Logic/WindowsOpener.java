@@ -2,18 +2,14 @@
 package Logic;
 
 
-import TaskAgent.TaskAgent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
-/**
- *
- * @author slowi
- */
-public class WindowsOpener {
+
+public class WindowsOpener { // klasa odpowiedzialna za otwieranie i zamykanie okienek
     public static Stage current;
     public static void alert(String title, String text) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -23,16 +19,16 @@ public class WindowsOpener {
         alert.showAndWait();
     }
 
-    public static void close_window() {
+    public static void close_window() {//metoda odpowiedzialna za zamykanie okna
         Stage stage = (Stage) current.getScene().getWindow();
         stage.close();
     }
     
-    public static void logout() {
+    public static void logout() {//metoda odpowiedzialna za wylogowywanie
         open("/TaskAgent/FXMLLogin.fxml","Login.fxml", false);
     }
 
-    public static void open(String window, String title, boolean resize) {
+    public static void open(String window, String title, boolean resize) {//metoda odpowiedzialna za otwieranie okna
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(WindowsOpener.class.getClass().getResource(window));
             Parent root1 = (Parent) fxmlLoader.load();
@@ -48,5 +44,5 @@ public class WindowsOpener {
          } catch(Exception e) {
              alert("Error","Nie można otwożyć okna " + e.getMessage());
          }
-    }//our window opening class
+    }
 }

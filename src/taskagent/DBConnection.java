@@ -15,7 +15,7 @@ public class DBConnection {
     private static String user = "sql7114809";
     private static String pass = "se4Ag7WSZ3";
     private static String parameters = "?useSSL=false&useUnicode=true&characterEncoding=UTF-8";
-//connection params
+//parametry do łączenia z bazą danych
     private static PreparedStatement preparedStatement = null;
 
     public DBConnection() throws SQLException {
@@ -29,7 +29,7 @@ public class DBConnection {
             System.err.println("Error: "+iae.getMessage());
         }
         conn = DriverManager.getConnection(url + dbName + parameters, user, pass);
-    }
+    }//metoda połączeniowa do bazt dancych
 
     public static ResultSet Query(String query) {
         ResultSet resultSet = null;
@@ -40,7 +40,7 @@ public class DBConnection {
             e.printStackTrace();
         }
         return resultSet;
-    }
+    }//metoda wykonująca zapytania typu select
     
     public static void Execute(String query) {
         try {
@@ -48,12 +48,12 @@ public class DBConnection {
         } catch (SQLException ex) {
             WindowsOpener.alert("Błąd", "Nie udało się wykonać zapytania!" + ex.getMessage());
         }
-    }
+    }//metoda wykonująca zapytania
 
     
     
     public static void editTask(int id, String name, String desc) {
         Execute("UPDATE tasks SET name = \""+name+"\", description = \""+desc+"\" WHERE id = "+id);
         WindowsOpener.open("/TaskAgent/FXMLTasks.fxml", "Tasks", true);
-    }
+    }// metoda służąca do edycji zadań
 }

@@ -76,5 +76,5 @@ public class Task {
     public void setDescription(String desc) {
         this.description = desc;
     }
-    //just task model
+    //model obiektu zadania
 }
